@@ -7,6 +7,10 @@ run-help() { help "$READLINE_LINE" 2>/dev/null || man "$READLINE_LINE"; }
 bind -m vi-insert -x '"\eh": run-help'
 bind -m emacs -x     '"\eh": run-help'
 
+if [ -f $HOME/.theme ]; then
+	. $HOME/.theme
+fi
+
 PS1="\[\033[1;32m\]\h\[\033[0;37m\]:\[\033[31m\][\[\033[1;34m\]\u\[\033[0;31m\]]\[\033[0;37m\]:\[\033[35m\]\w\[\033[1;33m\]$\[\033[0m\] "
 
 export PATH="$HOME/.local/bin/:$PATH"
