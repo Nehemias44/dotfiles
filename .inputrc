@@ -1,0 +1,28 @@
+# Permite moverse entre palabras con Control+Izquierda y Control+Derecha
+"\eOc": forward-word
+"\eOd": backward-word
+
+# Habilita el modo de búsqueda de historial 
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+
+# Reduce el completado con tabulador a 1 pusacion
+set show-all-if-unmodified on
+
+# Archivos de color por tipos
+set colored-stats On
+# Añadir un carácter para indicar el tipo
+set visible-stats On
+# Marcar directorios enlazados
+set mark-symlinked-directories On
+# Colorea el prefijo común
+set colored-completion-prefix On
+# Colorea el prefijo común en completado por menú
+set menu-complete-display-prefix On
+
+# Deshabilita que el terminal se haga eco de ^C después de presionar Control+C
+set echo-control-characters off
+
+# Estilo de urgencia, deshabilita el beep en la terminal
+set bell-style none
+
