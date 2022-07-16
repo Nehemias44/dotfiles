@@ -1,0 +1,56 @@
+* Agenda
+** Tramites
+*** Julio 2022
+**** TODO [#A] Revisar Mis inscripciones
+SCHEDULED: <2022-07-31 dom>
+[[https://inscripciones.ungs.edu.ar/g3w3_3190/][Siu Guaraní]]
+/No olvides revisar el día anterior a que comience la 2da inscripción para verificar si finalmente QUEDASTE inscrito./
+
+*** Agosto 2022
+**** TODO [#A]  Inicio de la 2da inscripción
+SCHEDULED: <2022-08-01 lun>
+[[Siu Guaraní]]
+/Reinscribite si no QUEDASTE inscrito a alguna materia./
+
+** LyTN
+
+*** Agosto 2022
+
+**** TODO [#A] LyTN Clase 1 Presencial
+SCHEDULED: <2022-08-08 lun 18:00>
+[[~/Documentos/LyTN/org/Lógica_Proposicional.org][Lógica Proposicional]]
+
+**** TODO [#B] LyTN Clase 2 Virtual/Asincronica
+SCHEDULED: <2022-08-10 mié 20:00>
+[[~/Documentos/LyTN/Materiales/teorica_equivalencias_logicas.pdf][Teórica: Equivalencias Lógicas]]
+
+**** TODO [#A] LyTN Clase 3 Presencial
+SCHEDULED: <2022-08-15 lun>
+[[~/Documentos/LyTN/Materiales/teorica_formas_normales.pdf][Formas Normales]]
+
+**** TODO [#B] LyTN Clase 4 Virtual/Asincronica
+SCHEDULED: <2022-08-17 mié>
+[[~/Documentos/LyTN/Materiales/teorica_formas_normales_completas.pdf][Formas Normales Completas]]
+
+**** TODO [#A] LyTN Clase 3 Presencial
+SCHEDULED: <2022-08-22 lun>
+[[~/Documentos/LyTN/Materiales/teorica_logica_de_predicados.pdf][Teórica: Lógica de predicados]]
+
+
+** Progra 2
+*** TODO [#A] Progra 2 Clase 1 Teórico/Practico (LABO COM 7226)
+SCHEDULED: <2022-08-09 mar 18:00>
+
+*** TODO [#B] Progra 2 Clase 2 Virtual/Asincronica
+SCHEDULED: <2022-08-11 jue 18:00>
+
+
+*** TODO [#A] Progra 2 Clase 3 Teórico/Practico (LABO COM 7226)
+SCHEDULED: <2022-08-16 mar>
+
+
+
+*** TODO [#B] Progra 2 Clase 4 Virtual/Asincronica
+SCHEDULED: <2022-08-18 jue>
+
+
