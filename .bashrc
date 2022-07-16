@@ -7,21 +7,19 @@ run-help() { help "$READLINE_LINE" 2>/dev/null || man "$READLINE_LINE"; }
 bind -m vi-insert -x '"\eh": run-help'
 bind -m emacs -x     '"\eh": run-help'
 
-if [ -f $HOME/.theme ]; then
-	. $HOME/.theme
-fi
-
 PS1="\[\033[1;32m\]\h\[\033[0;37m\]:\[\033[31m\][\[\033[1;34m\]\u\[\033[0;31m\]]\[\033[0;37m\]:\[\033[35m\]\w\[\033[1;33m\]$\[\033[0m\] "
 
+export PATH="$HOME/.cabal/bin:$PATH"
 export PATH="$HOME/.local/bin/:$PATH"
 export TERM="xterm-256color"                      
 export HISTCONTROL=ignoredups:erasedups           
 export ALTERNATE_EDITOR=""                        
-export EDITOR="nano"                              
+export EDITOR="nvim"                              
 export VISUAL="emacs"
 export BAT_THEME="ansi"
 
-alias gitdot='/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME'
+alias gitdot="/usr//bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
+alias gitagd="/usr//bin/git --git-dir=$HOME/.agenda.git/ --work-tree=$HOME"
 
 alias reboot='sudo reboot'
 alias shutdown='sudo shutdown'
@@ -48,11 +46,11 @@ alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 
 # Cambiando "ls" por "exa"
-# alias ls='exa --color=always --group-directories-first --icons'
-alias ls='exa -al --color=always --group-directories-first --icons' 
-alias la='exa -a --color=always --group-directories-first --icons'  
-alias ll='exa -l --color=always --group-directories-first --icons'  
-alias lt='exa -aT --color=always --group-directories-first --icons' 
+alias ls='exa --icons --color=always --group-directories-first'
+alias ls='exa --icons -al --color=always --group-directories-first' 
+alias la='exa --icons -a --color=always --group-directories-first'  
+alias ll='exa --icons -l --color=always --group-directories-first'  
+alias lt='exa --icons -aT --color=always --group-directories-first' 
 alias l.='exa -a | egrep "^\."'
 
 alias xlog='bat $HOME/.local/share/xorg/Xorg.0.log'
