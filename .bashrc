@@ -22,6 +22,7 @@ export VISUAL="emacs"
 export BAT_THEME="ansi"
 
 alias gitdot='/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME'
+alias gitadg='/usr/bin/git --git-dir=$HOME/.agenda.git/ --work-tree=$HOME'
 
 alias reboot='sudo reboot'
 alias shutdown='sudo shutdown'

@@ -15,8 +15,8 @@ Xft.lcdfilter:  lcddefault
 Xcursor.theme: Oxygen 18 White
 Xcursor.size: 16
 !Emacs.font: Iosevka Nerd Font-9
-Emacs.geometry: 90x30+50+60
-Emacs.internalBorder: 30
+!Emacs.geometry: 90x42+50+60
+!Emacs.internalBorder: 30
 
 !! URxvt Appearance
 URxvt.font:           xft:font1:style=Regular:size=12:antialias=true:hinting=true,\
