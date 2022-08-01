@@ -1,3 +1,3 @@
 #!/bin/sh
-export THEME_SELECT=/home/nehemias/.config/Xresources-themes/One_Light
+export THEME_SELECT=/home/nehemias/.config/Xresources-themes/One_Dark
 ln -sf $THEME_SELECT /tmp/Theme

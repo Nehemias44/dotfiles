@@ -12,7 +12,7 @@
 	       '(left . 40)
                '(top . 50)
                '(vertical-scroll-bars . nil)
-               '(internal-border-width . 30)
+               '(internal-border-width . 5)
                '(left-fringe    . 1)
                '(right-fringe   . 1)
                '(tool-bar-lines . 0)
@@ -20,9 +20,9 @@
 
 (setq x-underline-at-descent-line t)
 
-(setq window-divider-default-right-width 24)
-(setq window-divider-default-places 'right-only)
-(window-divider-mode 1)
+;; (setq window-divider-default-right-width 24)
+;; (setq window-divider-default-places 'right-only)
+;; (window-divider-mode 1)
 
 (setq inhibit-startup-screen t
       inhibit-startup-message t
@@ -82,67 +82,102 @@
 (use-package doom-themes
   :straight t
   :config
-  (load-theme 'doom-one-light t))
+  (load-theme 'doom-one t)
+  (setq doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
+  (doom-themes-treemacs-config))
 
-(straight-use-package
-  '(nano-emacs :type git :host github :repo "rougier/nano-emacs"))
+(set-face-attribute 'font-lock-keyword-face nil
+		    :slant 'italic)
+(set-face-attribute 'font-lock-comment-face nil
+		    :slant 'italic
+		    :weight 'bold)
+(set-face-attribute 'font-lock-type-face nil
+		    :slant 'italic)
 
-(require 'nano-theme-light)
-(require 'nano-faces)
-(nano-faces)
 
-(set-face-attribute 'window-divider nil
-                      :foreground (face-background 'nano-face-default))
-(set-face-attribute 'window-divider-first-pixel nil
-                    :foreground nano-color-background)
-  ;;                  :foreground (face-background 'nano-face-subtle))
-(set-face-attribute 'window-divider-last-pixel nil
-                      :foreground nano-color-background)
+;; (straight-use-package
+;;   '(nano-emacs :type git :host github :repo "rougier/nano-emacs"))
 
-(set-face-attribute 'mode-line nil
-                      :height 0.1
-		      :foreground (face-foreground 'nano-face-default)
-                      :background (face-background 'nano-face-default)
-                      ;; :underline  (if (display-graphic-p)
-                      ;;                 (face-background 'nano-face-subtle)
-                      ;;               t)
-		      :underline t
-                      :overline nil
-                      :box nil)
+;; (require 'nano-theme-light)
+;; (require 'nano-faces)
+;; (nano-faces)
 
-(set-face-attribute 'mode-line-inactive nil
-                    :height 0.1
-		    :foreground (face-foreground 'nano-face-default)
-                    :background (face-background 'nano-face-default)
-                    ;; :underline (if (display-graphic-p)
-                    ;;                (face-background 'nano-face-subtle)
-                    ;;              t)
-		    :underline t
-                    :overline nil
-                    :inherit nil
-                    :box nil)
+;; (set-face-attribute 'window-divider nil
+;;                       :foreground (face-background 'nano-face-default))
+;; (set-face-attribute 'window-divider-first-pixel nil
+;;                     :foreground nano-color-background)
+;;   ;;                  :foreground (face-background 'nano-face-subtle))
+;; (set-face-attribute 'window-divider-last-pixel nil
+;;                       :foreground nano-color-background)
 
-(set-face-attribute 'header-line nil
-                    :weight 'light
-                    ;; :foreground (face-foreground 'nano-face-default)
-                    ;; :background (face-background 'nano-face-default)
-		    :foreground (doom-color 'modeline-fg)
-		    :background (doom-color 'modeline-bg)
-                    :overline nil
-                    :underline nil
-                    :box nil
-                    :box `(:line-width 1
-                                       :color ,(face-background 'nano-face-default)
-                                       :style nil)
-                    :inherit nil)
+;; (set-face-attribute 'mode-line nil
+;;                       :height 0.1
+;; 		      :foreground (face-foreground 'nano-face-default)
+;;                       :background (face-background 'nano-face-default)
+;;                       ;; :underline  (if (display-graphic-p)
+;;                       ;;                 (face-background 'nano-face-subtle)
+;;                       ;;               t)
+;; 		      :underline t
+;;                       :overline nil
+;;                       :box nil)
 
-(set-face-attribute 'internal-border nil
-                    :background (face-background 'nano-face-default))
+;; (set-face-attribute 'mode-line-inactive nil
+;;                     :height 0.1
+;; 		    :foreground (face-foreground 'nano-face-default)
+;;                     :background (face-background 'nano-face-default)
+;;                     ;; :underline (if (display-graphic-p)
+;;                     ;;                (face-background 'nano-face-subtle)
+;;                     ;;              t)
+;; 		    :underline t
+;;                     :overline nil
+;;                     :inherit nil
+;;                     :box nil)
 
-(set-face-foreground 'vertical-border nano-color-subtle)
+;; (set-face-attribute 'header-line nil
+;;                     :weight 'light
+;;                     ;; :foreground (face-foreground 'nano-face-default)
+;;                     ;; :background (face-background 'nano-face-default)
+;; 		    :foreground (doom-color 'modeline-fg)
+;; 		    :background (doom-color 'modeline-bg)
+;;                     :overline nil
+;;                     :underline nil
+;;                     :box nil
+;;                     :box `(:line-width 1
+;;                                        :color ,(face-background 'nano-face-default)
+;;                                        :style nil)
+;;                     :inherit nil)
 
-(require 'nano-modeline)
-(require 'nano-theme)
+;; (set-face-attribute 'internal-border nil
+;;                     :background (face-background 'nano-face-default))
+
+;; (set-face-foreground 'vertical-border nano-color-subtle)
+
+;; (require 'nano-modeline)
+;; (require 'nano-theme)
+
+(use-package doom-modeline
+  :straight t
+  :init (doom-modeline-mode 1)
+  :config
+  (setq doom-modeline-height 30
+	doom-modeline-bar-width 5))
+
+(use-package treemacs
+  :straight t
+  :config
+  (setq treemacs-follow-mode t)
+  :bind
+  (:map global-map
+        ("M-0"       . treemacs-select-window)
+        ("C-x t 1"   . treemacs-delete-other-windows)
+        ("C-x t t"   . treemacs)
+        ("C-x t d"   . treemacs-select-directory)
+        ("C-x t B"   . treemacs-bookmark)
+        ("C-x t C-t" . treemacs-find-file)
+        ("C-x t M-t" . treemacs-find-tag)))
+
+(use-package treemacs-projectile
+  :straight t)
 
 (use-package company
   :straight t
@@ -170,6 +205,23 @@
 
 (use-package all-the-icons
   :straight t)
+
+(use-package dashboard
+  :straight t
+  :init      ;; tweak dashboard config before loading it
+  (setq dashboard-set-heading-icons t)
+  (setq dashboard-set-file-icons t)
+  (setq dashboard-banner-logo-title "Emacs Is More Than A Text Editor!")
+  ;;(setq dashboard-startup-banner 'logo) ;; use standard emacs logo as banner
+  (setq dashboard-startup-banner "~/.emacs.d/emacs-orange.png")  ;; use custom image as banner
+  (setq dashboard-center-content nil) ;; set to 't' for centered content
+  (setq dashboard-items '((recents . 5)
+                          (agenda . 5 )
+                          (bookmarks . 3)
+                          (projects . 3)))
+  (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
+  :config
+  (dashboard-setup-startup-hook))
 
 (use-package all-the-icons-dired
   :straight '(:type git :host github :repo "jtbm37/all-the-icons-dired")
@@ -236,6 +288,28 @@
 ;; optionally if you want to use debugger
 ;; (use-package dap-mode)
 ;; (use-package dap-LANGUAGE) to load the dap adapter for your language
+
+(use-package dap-mode
+  :straight t)
+
+(use-package lsp-java
+  :straight t
+  :hook
+  (java-mode . lsp))
+
+(use-package dap-java)
+
+(use-package helm
+  :straight t
+  :bind
+  ("M-x" . helm-M-x)
+  ("C-x b" . helm-buffers-list)
+  ("C-x C-f" . helm-find-files)
+  :config
+  (helm-mode 1))
+
+(use-package lsp-treemacs
+  :straight t)
 
 (use-package yasnippet
   :straight t

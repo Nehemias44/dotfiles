@@ -7,9 +7,12 @@ run-help() { help "$READLINE_LINE" 2>/dev/null || man "$READLINE_LINE"; }
 bind -m vi-insert -x '"\eh": run-help'
 bind -m emacs -x     '"\eh": run-help'
 
+if [ -f $HOME/.theme ]; then
+	. $HOME/.theme
+fi
+
 PS1="\[\033[1;32m\]\h\[\033[0;37m\]:\[\033[31m\][\[\033[1;34m\]\u\[\033[0;31m\]]\[\033[0;37m\]:\[\033[35m\]\w\[\033[1;33m\]$\[\033[0m\] "
 
-export PATH="$HOME/.cabal/bin:$PATH"
 export PATH="$HOME/.local/bin/:$PATH"
 export TERM="xterm-256color"                      
 export HISTCONTROL=ignoredups:erasedups           
@@ -18,13 +21,8 @@ export EDITOR="nvim"
 export VISUAL="emacs"
 export BAT_THEME="ansi"
 
-<<<<<<< HEAD
 alias gitdot='/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME'
 alias gitadg='/usr/bin/git --git-dir=$HOME/.agenda.git/ --work-tree=$HOME'
-=======
-alias gitdot="/usr//bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
-alias gitagd="/usr//bin/git --git-dir=$HOME/.agenda.git/ --work-tree=$HOME"
->>>>>>> a2be58cbfa2ada475d62bc29011aaf0d65fcb769
 
 alias reboot='sudo reboot'
 alias shutdown='sudo shutdown'
