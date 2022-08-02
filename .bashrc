@@ -20,6 +20,7 @@ export ALTERNATE_EDITOR=""
 export EDITOR="nvim"                              
 export VISUAL="emacs"
 export BAT_THEME="ansi"
+export LIBSEAT_BACKEND="logind"
 
 alias gitdot='/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME'
 alias gitadg='/usr/bin/git --git-dir=$HOME/.agenda.git/ --work-tree=$HOME'

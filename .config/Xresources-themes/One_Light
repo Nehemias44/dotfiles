@@ -1,0 +1,54 @@
+! One Light
+
+#define base00 #fbfbfb 
+#define base01 #e45649
+#define base02 #40a14f
+#define base03 #c18401
+#define base04 #0184bc
+#define base05 #a626a4
+#define base06 #0997b3
+#define base07 #383a42
+#define base08 #9ca0a4
+#define base09 #ff6c6b
+#define base0A #98be65
+#define base0B #ecbe7b
+#define base0C #5699af
+#define base0D #c678dd
+#define base0E #3071db
+#define base0F #9ca0a4
+
+*.foreground:  base07
+*.background:  base00
+*.cursorColor: base05
+
+! Black
+*.color0:   base00
+*.color8:   base08
+
+! Red
+*.color1:   base01
+*.color9:   base09
+
+! Green
+*.color2:   base02
+*.color10:  base0A	
+
+! Yellow
+*.color3:   base03
+*.color11:  base0B
+
+! Blue
+*.color4:   base04
+*.color12:  base0C
+
+! Magenta
+*.color5:   base05
+*.color13:  base0D
+
+! Cyan
+*.color6:   base06
+*.color14:  base0E
+
+! White
+*.color7:   base07
+*.color15:  base0F
