@@ -1,0 +1,9 @@
+#!/bin/bash
+
+DATE=$(date '+%a %d %I:%M%p')
+ICON=" "
+COLOR=$(xrdb -get color14)
+COLOR="^c$COLOR^"
+RESET="^d^"
+
+echo $COLOR$ICON$DATE$RESET

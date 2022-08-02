@@ -1,0 +1,11 @@
+#!/bin/sh
+
+CAPACITY=$(/bin/cat /sys/class/power_supply/BAT0/capacity)
+STATUS=$(/bin/cat /sys/class/power_supply/BAT0/status)
+COLOR=$(xrdb -get color9)
+COLOR="^c$COLOR^"
+RESET="^d^"
+ICON=" "
+
+
+echo $COLOR$ICON$CAPACITY%"("$STATUS")"$RESET

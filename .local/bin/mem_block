@@ -1,0 +1,9 @@
+#!/bin/bash
+
+MEM=$( free -h | awk '/^Mem/ { print $3}' | sed s/i//g)
+
+COLOR=$(xrdb -get color13)
+COLOR="^c$COLOR^"
+RESET="^d^"
+ICON=" "
+echo $COLOR$ICON$MEM$RESET

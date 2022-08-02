@@ -1,0 +1,19 @@
+#!/bin/bash
+
+INTERFACE=$(ip link | grep -o 'wl[a-z0-9]*')
+STATE=$(iw $INTERFACE link)
+
+COLOR=$(xrdb -get color10)
+COLOR="^c$COLOR^"
+RESET="^d^"
+ICON="  "
+
+if [[ $STATE != "Not connected." ]] 
+then
+    STATE=$(iw $INTERFACE link | awk '/SSID/ { print $2 }')
+else
+    STATE="Disconnected"
+fi
+
+echo $COLOR$ICON$STATE$RESET
+
