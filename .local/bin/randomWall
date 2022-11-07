@@ -1,0 +1,22 @@
+#!/bin/sh
+
+if pidof -x $(basename $0) > /dev/null; then
+    for p in $(pidof $(basename $0)); do
+	if [ $p -ne $0 ]
+	then
+	    echo "El script ya esta en ejecucion... Saliendo"
+	    exit
+	fi
+    done
+fi
+
+while true; do
+
+    if ! pgrep "dwm" > /dev/null  ; then
+	exit
+    fi
+
+    feh --randomize --bg-fill ~/Imágenes/Wallpapers/
+    sleep 300
+    
+done
