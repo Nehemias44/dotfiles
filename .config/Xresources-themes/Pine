@@ -16,8 +16,8 @@
 #define base0F #e0def4
 
 *.foreground:  #e0def4
-*.background:  #191724
-*.cursorColor: #524f67
+*.background:  #26233a
+*.cursorColor: #31748f
 
 ! *.foreground:  base07
 ! *.background:  base00

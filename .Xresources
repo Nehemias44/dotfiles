@@ -1,7 +1,7 @@
 #include </tmp/Theme>
 
 !! Xdefaults
-#define font1   Iosevka Nerd Font
+#define font1   CozetteVector
 #define font2   feather
 
 Xft.dpi:        96
@@ -62,7 +62,8 @@ URxvt.tabbed.tab-bg: 7
 
 dwm.normbgcolor:       base00
 dwm.normfgcolor:       base07
-dwm.normbordercolor:   base0E
+dwm.normbordercolor:   base00
+
 dwm.selbgcolor:        base00
 dwm.selfgcolor:	       base0E
 dwm.selbordercolor:    base0E

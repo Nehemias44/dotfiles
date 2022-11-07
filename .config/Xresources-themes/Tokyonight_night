@@ -1,6 +1,6 @@
 ! TokyoNight night
 
-#define base00 #15161E
+#define base00 #1a1b26
 #define base01 #f7768e
 #define base02 #9ece6a
 #define base03 #e0af68
@@ -17,8 +17,8 @@
 #define base0E #7dcfff
 #define base0F #c0caf5
 
-*.foreground:  base07
-*.background:  base00
+*.foreground:  #c0caf5
+*.background:  #1a1b26
 *.cursorColor: base05
 
 ! Black

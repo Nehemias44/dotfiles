@@ -5,7 +5,7 @@ STATUS=$(/bin/cat /sys/class/power_supply/BAT0/status)
 COLOR=$(xrdb -get color9)
 COLOR="^c$COLOR^"
 RESET="^d^"
-ICON=" "
+ICON="BAT:"
 
 
 echo $COLOR$ICON$CAPACITY%"("$STATUS")"$RESET
