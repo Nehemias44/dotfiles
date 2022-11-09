@@ -80,7 +80,7 @@
   :config
    (setq doom-themes-enable-bold t    ;if nil, bold is universally disabled
          doom-themes-enable-italic t) ;if nil, italics is universally disabled
-   (load-theme 'doom-one-light t))
+   (load-theme 'doom-gruvbox-light t))
 
 (straight-use-package
   '(nano-emacs :type git :host github :repo "rougier/nano-emacs"))
@@ -180,6 +180,8 @@
   (setq dashboard-startup-banner "~/.emacs.d/emacs-e.svg")
   (setq dashboard-center-content nil)
   (setq dashboard-show-shortcuts t)
+  (setq dashboard-set-heading-icons t)
+  (setq dashboard-set-file-icons t)
   (setq dashboard-items '((recents  . 3)
                           (bookmarks . 5)
                           (projects . 3)
