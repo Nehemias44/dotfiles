@@ -10,13 +10,19 @@ if pidof -x $(basename $0) > /dev/null; then
     done
 fi
 
+DIRECTORY=$1
+
+if [ -z $1 ] ; then
+    DIRECTORY=~/Imágenes/Wallpapers/
+fi
+
 while true; do
 
     if ! pgrep "dwm" > /dev/null  ; then
 	exit
     fi
 
-    feh --randomize --bg-fill ~/Imágenes/Wallpapers/
+    feh --randomize --bg-fill $DIRECTORY
     sleep 300
     
 done

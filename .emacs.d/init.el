@@ -72,31 +72,32 @@
 
 (straight-use-package 'use-package)
 
+(add-to-list 'load-path "~/.emacs.d/lisp")
+
 (setq-default cursor-type '(bar . 2))
 (set-cursor-color "#a626a4")
 
-(use-package doom-themes
+(use-package autothemer
+  :straight t)
+
+(use-package catppuccin-theme
   :straight t
   :config
-   (setq doom-themes-enable-bold t    ;if nil, bold is universally disabled
-         doom-themes-enable-italic t) ;if nil, italics is universally disabled
-   (load-theme 'doom-gruvbox-light t))
+  (load-theme 'catppuccin-macchiato t))
+
+;; (use-package doom-themes
+;;   :straight t
+;;   :config
+;;    (setq doom-themes-enable-bold t    ;if nil, bold is universally disabled
+;;          doom-themes-enable-italic t) ;if nil, italics is universally disabled
+;;    (load-theme 'doom-one-light t))
 
 (straight-use-package
   '(nano-emacs :type git :host github :repo "rougier/nano-emacs"))
 
-(require 'nano-theme-light)
 (require 'nano-theme)
-
-(setq nano-color-foreground (doom-color 'fg))
-(setq nano-color-background (doom-color 'bg))
-(setq nano-color-highlight  (doom-color 'base3))
-(setq nano-color-critical   (doom-color 'red))
-(setq nano-color-salient    (doom-color 'magenta))
-(setq nano-color-strong     (doom-color 'base8))
-(setq nano-color-popout     (doom-color 'green))
-(setq nano-color-subtle     (doom-color 'base1))
-(setq nano-color-faded      (doom-color 'base4))
+(require 'nano-theme-dark)
+(load-file "~/.emacs.d/lisp/nano-colors-catppuccin-macchiato.el")
 
 (require 'nano-faces)
 (require 'nano-modeline)
@@ -150,10 +151,13 @@
 
 (set-face-foreground 'vertical-border nano-color-subtle)
 
-;; (set-face-attribute 'nano-face-header-default nil
-;; 		    :background (doom-color 'bg-alt))
-;; (set-face-attribute 'nano-face-header-strong nil
-;; 		    :background (doom-color 'bg-alt))
+(set-face-attribute 'nano-face-header-default nil
+		    :background "#181825")
+(set-face-attribute 'nano-face-header-strong nil
+		    :background "#181825")
+
+(set-face-attribute 'nano-face-default nil
+		    :background "#1e1e2e")
 
 (set-face-attribute 'font-lock-keyword-face nil
 		    :weight 'bold
@@ -188,6 +192,9 @@
                           (agenda . 5)))
   (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
   (dashboard-setup-startup-hook))
+
+(set-face-attribute 'dashboard-banner-logo-title 'nil
+		      :height 140)
 
 (use-package all-the-icons-dired
   :straight '(:type git :host github :repo "jtbm37/all-the-icons-dired")
@@ -254,6 +261,16 @@
   :config
   (rainbow-mode t))
 
+(use-package iedit
+  :straight t)
+
+(use-package multiple-cursors
+  :straight t
+  :config
+  (global-set-key (kbd "C->")     'mc/mark-next-like-this)
+  (global-set-key (kbd "C-<")     'mc/mark-previous-like-this)
+  (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this))
+
 (use-package rainbow-delimiters
   :straight t
   :hook
@@ -287,6 +304,7 @@
          (c-mode . lsp)
 	 (c++-mode . lsp)
 	 (rust-mode . lsp)
+	 (python-mode . lsp)
          ;; if you want which-key integration
          (lsp-mode . lsp-enable-which-key-integration))
   :commands lsp)
@@ -333,7 +351,7 @@
 (use-package flyspell-correct-ivy
   :after flyspell
   :bind (:map flyspell-mode-map
-	    ("C-;" . flyspell-correct-word-generic))
+	    ("C-:" . flyspell-correct-word-generic))
   :custom (flyspell-correct-interface 'flyspell-correct-ivy))
 
 (use-package ispell
@@ -561,8 +579,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(warning-suppress-log-types '((holidays) (holidays)))
- '(warning-suppress-types '((holidays))))
+ '(custom-safe-themes
+   '("2af6d337981b88f85980124e47e11cbff819200bba92648f59154a6ff35a7801" default))
+ '(org-agenda-files nil)
+ '(warning-suppress-log-types '((use-package) (use-package) (use-package) (holidays)))
+ '(warning-suppress-types '((use-package) (use-package) (holidays))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

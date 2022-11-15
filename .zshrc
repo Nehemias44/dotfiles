@@ -27,7 +27,7 @@ if [ -f $HOME/.theme ]; then
 	. $HOME/.theme
 fi
 
-export PATH="$HOME/.local/bin/:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export TERM="xterm-256color"                   
 export HISTCONTROL=ignoredups:erasedups           
@@ -35,7 +35,7 @@ export ALTERNATE_EDITOR=""
 export EDITOR="nano"                              
 export VISUAL="emacs"
 export BAT_THEME="ansi"
-
+export RANGER_LOAD_DEFAULT_RC=FALSE
 
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME'
 alias agenda='/usr/bin/git --git-dir=$HOME/.agenda.git/ --work-tree=$HOME'
