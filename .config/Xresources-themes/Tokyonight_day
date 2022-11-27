@@ -18,8 +18,8 @@
 #define base0F #3760bf
 
 
-*.foreground:  base07
-*.background:  base00
+*.foreground:  #3760bf
+*.background:  #e1e2e7
 *.cursorColor: base05
 
 ! Black

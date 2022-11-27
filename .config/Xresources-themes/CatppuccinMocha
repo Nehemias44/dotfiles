@@ -1,0 +1,39 @@
+! Catppuccin Mocha
+
+#define base00 #1E1E2E
+#define base01 #F38BA8
+#define base02 #A6E3A1
+#define base03 #F9E2AF
+#define base04 #89B4FA
+#define base05 #F5C2E7
+#define base06 #94E2D5
+#define base07 #BAC2DE
+#define base08 #585B70
+#define base09 #F38BA8
+#define base0A #A6E3A1
+#define base0B #F9E2AF
+#define base0C #89B4FA
+#define base0D #F5C2E7
+#define base0E #94E2D5
+#define base0F #CDD6F4
+
+*.background: base00
+*.foreground: base0F
+*.cursorColor:base0C
+
+*.color0:    base00
+*.color1:    base01
+*.color2:    base02
+*.color3:    base03
+*.color4:    base04
+*.color5:    base05
+*.color6:    base06
+*.color7:    base07
+*.color8:    base08
+*.color9:    base09
+*.color10:   base0A
+*.color11:   base0B
+*.color12:   base0C
+*.color13:   base0D
+*.color14:   base0E
+*.color15:   base0F

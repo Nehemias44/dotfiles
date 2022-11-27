@@ -1,0 +1,39 @@
+! Catppuccin Macchiato
+
+#define base00 #24273A
+#define base01 #ED8796
+#define base02 #A6DA95
+#define base03 #EED49F
+#define base04 #8AADF4
+#define base05 #F5BDE6
+#define base06 #8BD5CA
+#define base07 #B8C0E0
+#define base08 #5B6078
+#define base09 #ED8796
+#define base0A #A6DA95
+#define base0B #EED49F
+#define base0C #8AADF4
+#define base0D #F5BDE6
+#define base0E #8BD5CA
+#define base0F #CAD3F5
+
+*.background: base00
+*.foreground: base0F
+*.cursorColor:base0C
+
+*.color0:    base00
+*.color1:    base01
+*.color2:    base02
+*.color3:    base03
+*.color4:    base04
+*.color5:    base05
+*.color6:    base06
+*.color7:    base07
+*.color8:    base08
+*.color9:    base09
+*.color10:   base0A
+*.color11:   base0B
+*.color12:   base0C
+*.color13:   base0D
+*.color14:   base0E
+*.color15:   base0F

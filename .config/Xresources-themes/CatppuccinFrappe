@@ -1,0 +1,40 @@
+! Catppuccin Frappe
+
+#define base00 #303446
+#define base01 #E78284
+#define base02 #A6D189
+#define base03 #E5C890
+#define base04 #8CAAEE
+#define base05 #F4B8E4
+#define base06 #81C8BE
+#define base07 #C6D0F5
+#define base08 #626880
+#define base09 #E78284
+#define base0A #A6D189
+#define base0B #E5C890
+#define base0C #8CAAEE
+#define base0D #F4B8E4
+#define base0E #81C8BE
+#define base0F #A5ADCE
+
+*.background: base00
+*.foreground: base07
+*.cursorColor:base0D
+
+*.color0:    base00
+*.color1:    base01
+*.color2:    base02
+*.color3:    base03
+*.color4:    base04
+*.color5:    base05
+*.color6:    base06
+*.color7:    base07
+*.color8:    base08
+*.color9:    base09
+*.color10:   base0A
+*.color11:   base0B
+*.color12:   base0C
+*.color13:   base0D
+*.color14:   base0E
+*.color15:   base0F
+

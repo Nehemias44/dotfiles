@@ -1,3 +1,3 @@
 #!/bin/sh
-export THEME_SELECT=/home/nehemias/.config/Xresources-themes/RosePine
+export THEME_SELECT=/home/nehemias/.config/Xresources-themes/Tokyonight_day
 ln -sf $THEME_SELECT /tmp/Theme

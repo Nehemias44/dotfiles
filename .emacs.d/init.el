@@ -1,12 +1,12 @@
 (setq default-frame-alist
       (append (list
-	       '(font . "Iosevka Nerd Font-13")
+	       '(font . "Roboto Mono Light-13")
 	       '(min-height . 1)
-               '(height     . 42)
+               '(height     . 48)
 	       '(min-width  . 1)
-               '(width      . 86)
-	       '(left . 40)
-               '(top . 50)
+               '(width      . 200)
+;;	       '(left . 40)
+;;               '(top . 50)
                '(vertical-scroll-bars . nil)
                '(internal-border-width . 30)
                '(left-fringe    . 1)
@@ -77,27 +77,37 @@
 (setq-default cursor-type '(bar . 2))
 (set-cursor-color "#a626a4")
 
-(use-package autothemer
-  :straight t)
+;; (use-package autothemer
+;;   :straight t)
 
-(use-package catppuccin-theme
-  :straight t
-  :config
-  (load-theme 'catppuccin-macchiato t))
-
-;; (use-package doom-themes
+;; (use-package catppuccin-theme
 ;;   :straight t
 ;;   :config
-;;    (setq doom-themes-enable-bold t    ;if nil, bold is universally disabled
-;;          doom-themes-enable-italic t) ;if nil, italics is universally disabled
-;;    (load-theme 'doom-one-light t))
+;;   (load-theme 'catppuccin-macchiato t))
+
+(use-package doom-themes
+  :straight t
+  :config
+   (setq doom-themes-enable-bold t    ;if nil, bold is universally disabled
+         doom-themes-enable-italic t) ;if nil, italics is universally disabled
+   (load-theme 'doom-one-light t))
 
 (straight-use-package
   '(nano-emacs :type git :host github :repo "rougier/nano-emacs"))
 
 (require 'nano-theme)
 (require 'nano-theme-dark)
-(load-file "~/.emacs.d/lisp/nano-colors-catppuccin-macchiato.el")
+;; (load-file "~/.emacs.d/lisp/nano-colors-catppuccin-macchiato.el")
+
+(setq nano-color-background (doom-color 'bg))
+(setq nano-color-foreground (doom-color 'fg))
+(setq nano-color-highlight (doom-color 'base0))
+(setq nano-color-critical (doom-color 'red))
+(setq nano-color-salient (doom-color 'magenta))
+(setq nano-color-strong (doom-color 'base8))
+(setq nano-color-popout (doom-color 'green))
+(setq nano-color-subtle (doom-color 'base1))
+(setq nano-color-faded (doom-color 'base4))
 
 (require 'nano-faces)
 (require 'nano-modeline)
@@ -152,49 +162,58 @@
 (set-face-foreground 'vertical-border nano-color-subtle)
 
 (set-face-attribute 'nano-face-header-default nil
-		    :background "#181825")
+		    :background (doom-color 'bg-alt))
 (set-face-attribute 'nano-face-header-strong nil
-		    :background "#181825")
+		    :background (doom-color 'bg-alt))
 
 (set-face-attribute 'nano-face-default nil
-		    :background "#1e1e2e")
+		    :background (doom-color 'bg-alt))
 
 (set-face-attribute 'font-lock-keyword-face nil
-		    :weight 'bold
-		    :slant 'italic)
-(set-face-attribute 'font-lock-comment-face nil
 		    :slant 'italic
-		    :weight 'bold)
+		    :weight 'semi-light
+		    :foreground (doom-color 'blue))
+(set-face-attribute 'font-lock-comment-face nil
+		    :slant 'italic)
 (set-face-attribute 'font-lock-type-face nil
 		    :slant 'italic)
 (set-face-attribute 'line-number nil
-		    :slant 'italic)
+		    :slant 'italic
+		    :weight 'semi-light)
 
 
 (use-package all-the-icons
   :straight t)
 
 (use-package projectile
-  :straight t)
+  :straight t
+  :config
+  (projectile-mode +1)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
 
 (use-package dashboard
   :straight t
   :config
   (setq dashboard-banner-logo-title "Welcome to Emacs Dashboard")
-  (setq dashboard-startup-banner "~/.emacs.d/emacs-e.svg")
+  (setq dashboard-startup-banner "~/.emacs.d/emacs-e.png")
   (setq dashboard-center-content nil)
   (setq dashboard-show-shortcuts t)
   (setq dashboard-set-heading-icons t)
   (setq dashboard-set-file-icons t)
-  (setq dashboard-items '((recents  . 3)
+  (setq dashboard-items '((recents  . 5)
                           (bookmarks . 5)
-                          (projects . 3)
+                          (projects . 5)
                           (agenda . 5)))
   (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
   (dashboard-setup-startup-hook))
 
 (set-face-attribute 'dashboard-banner-logo-title 'nil
-		      :height 140)
+		    :height 140)
+(set-face-attribute 'dashboard-footer 'nil
+		    :height 140
+		    :slant 'italic
+		    :weight 'light
+		    :foreground (doom-color 'magenta))
 
 (use-package all-the-icons-dired
   :straight '(:type git :host github :repo "jtbm37/all-the-icons-dired")
@@ -258,8 +277,8 @@
 ;; Style
 (use-package rainbow-mode
   :straight t
-  :config
-  (rainbow-mode t))
+  :hook
+  (prog-mode . rainbow-delimiters-mode))
 
 (use-package iedit
   :straight t)
@@ -273,8 +292,18 @@
 
 (use-package rainbow-delimiters
   :straight t
-  :hook
-  (prog-mode . rainbow-delimiters-mode))
+  :config
+  (rainbow-delimiters-mode +1))
+
+(set-face-attribute 'rainbow-delimiters-depth-1-face 'nil :weight 'bold)
+(set-face-attribute 'rainbow-delimiters-depth-2-face 'nil :weight 'bold)
+(set-face-attribute 'rainbow-delimiters-depth-3-face 'nil :weight 'bold)
+(set-face-attribute 'rainbow-delimiters-depth-4-face 'nil :weight 'bold)
+(set-face-attribute 'rainbow-delimiters-depth-5-face 'nil :weight 'bold)
+(set-face-attribute 'rainbow-delimiters-depth-6-face 'nil :weight 'bold)
+(set-face-attribute 'rainbow-delimiters-depth-7-face 'nil :weight 'bold)
+(set-face-attribute 'rainbow-delimiters-depth-8-face 'nil :weight 'bold)
+(set-face-attribute 'rainbow-delimiters-depth-9-face 'nil :weight 'bold)
 
 (use-package rust-mode
   :straight t
@@ -526,8 +555,8 @@
 	("ENPROCESO" . "#a626a4")
 	("BLOQUEADO" . "#e45649")
 	("HECHO"     . "#9ca0a4")
-	("CANCELADO" , "#9ca0a4")	
-	("ARCHIVAR"  . "#986801")))
+	("CANCELADO" , "#383a42")	
+	("ARCHIVAR"  . "#a0bcf8")))
 
 ;; Mejorando aún más el aspecto de los bullets gracias al paquete org-bullets
 (use-package org-bullets
@@ -570,18 +599,58 @@
   ;(org-agenda-time-grid '((daily today require-timed)))
   (org-agenda-use-tag-inheritance t)
   ;(org-enforce-todo-dependencies t)
-  (org-habit-show-habits-only-for-today nil)
+  (org-habit-show-habits-only-for-today t)
   ;(org-track-ordered-property-with-tag t)
   )
 
+(defun my/frame-recenter (&optional frame)
+  "Center FRAME on the screen.
+FRAME can be a frame name, a terminal name, or a frame.
+If FRAME is omitted or nil, use currently selected frame."
+  (interactive)
+  (unless (eq 'maximised (frame-parameter nil 'fullscreen))
+    (let* ((frame (or (and (boundp 'frame)
+                            frame)
+                      (selected-frame)))
+           (frame-w (frame-pixel-width frame))
+           (frame-h (frame-pixel-height frame))
+           ;; frame-monitor-workarea returns (x y width height) for the monitor
+           (monitor-w (nth 2 (frame-monitor-workarea frame)))
+           (monitor-h (nth 3 (frame-monitor-workarea frame)))
+           (center (list (/ (- monitor-w frame-w) 2)
+                         (/ (- monitor-h frame-h) 2))))
+      (apply 'set-frame-position (flatten-list (list frame center))))))
+
+(add-hook 'after-init-hook #'my/frame-recenter)
+(add-hook 'after-make-frame-functions #'my/frame-recenter)
+
+(use-package mpdel
+  :straight t
+  :config
+  (setq mpdel-prefix-key (kbd "C-. z"))
+  (mpdel-mode))
+
+(use-package emms
+  :straight t
+  :config
+  (require 'emms-setup)
+  (require 'emms-player-mpd)
+  (emms-all)
+  (setq emms-seek-second 5
+	emms-player-list '(emms-player-mpd)
+	emms-info-functions '(emms-info-tinytag)
+	emms-browser-covers 'emms-browser-cache-thumbnail-async
+	emms-player-mpd-server-name "localhost"
+	emms-player-mpd-server-port "6600")
+  (emms-add-directory-tree "~/Música"))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; If you edit it by hand, you could mess it up, so be carril.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    '("2af6d337981b88f85980124e47e11cbff819200bba92648f59154a6ff35a7801" default))
- '(org-agenda-files nil)
  '(warning-suppress-log-types '((use-package) (use-package) (use-package) (holidays)))
  '(warning-suppress-types '((use-package) (use-package) (holidays))))
 (custom-set-faces
