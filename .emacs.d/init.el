@@ -1,6 +1,6 @@
 (setq default-frame-alist
       (append (list
-	       '(font . "Roboto Mono Light-13")
+	       '(font . "MonoLisa-Light-12")
 	       '(min-height . 1)
                '(height     . 48)
 	       '(min-width  . 1)
@@ -41,7 +41,8 @@
       scroll-conservatively     1000)
 
 (setq-default org-support-shift-select  t
-	      c-basic-offset 8)
+	      c-basic-offset 8
+	      line-spacing 0.1)
 
 (fset 'yes-or-no-p 'y-or-n-p)
 (electric-pair-mode +1)
@@ -77,37 +78,43 @@
 (setq-default cursor-type '(bar . 2))
 (set-cursor-color "#a626a4")
 
-;; (use-package autothemer
-;;   :straight t)
+(use-package autothemer
+  :straight t)
 
-;; (use-package catppuccin-theme
+;; (straight-use-package
+;;   '(rose-pine-emacs :type git :host github :repo "thongpv87/rose-pine-emacs"))
+
+;; (load-theme 'rose-pine-moon t)
+
+(straight-use-package
+ '(catppuccin :type git :host github :repo "catppuccin/emacs"))
+
+(load-theme 'catppuccin t)
+(setq catppuccin-flavor 'mocha) ;; or 'latte, 'macchiato, or 'mocha
+(catppuccin-reload)
+
+;; (use-package doom-themes
 ;;   :straight t
 ;;   :config
-;;   (load-theme 'catppuccin-macchiato t))
-
-(use-package doom-themes
-  :straight t
-  :config
-   (setq doom-themes-enable-bold t    ;if nil, bold is universally disabled
-         doom-themes-enable-italic t) ;if nil, italics is universally disabled
-   (load-theme 'doom-one-light t))
+;;    (setq doom-themes-enable-bold t    ;if nil, bold is universally disabled
+;;          doom-themes-enable-italic t) ;if nil, italics is universally disabled
+;;    (load-theme 'doom-one-light t))
 
 (straight-use-package
   '(nano-emacs :type git :host github :repo "rougier/nano-emacs"))
 
 (require 'nano-theme)
 (require 'nano-theme-dark)
-;; (load-file "~/.emacs.d/lisp/nano-colors-catppuccin-macchiato.el")
 
-(setq nano-color-background (doom-color 'bg))
-(setq nano-color-foreground (doom-color 'fg))
-(setq nano-color-highlight (doom-color 'base0))
-(setq nano-color-critical (doom-color 'red))
-(setq nano-color-salient (doom-color 'magenta))
-(setq nano-color-strong (doom-color 'base8))
-(setq nano-color-popout (doom-color 'green))
-(setq nano-color-subtle (doom-color 'base1))
-(setq nano-color-faded (doom-color 'base4))
+(setq nano-color-background (catppuccin-get-color 'base))
+(setq nano-color-foreground (catppuccin-get-color 'text))
+(setq nano-color-highlight (catppuccin-get-color 'subtext0))
+(setq nano-color-critical (catppuccin-get-color 'red))
+(setq nano-color-salient (catppuccin-get-color 'mauve))
+(setq nano-color-strong "#232634")
+(setq nano-color-popout (catppuccin-get-color 'green))
+(setq nano-color-subtle (catppuccin-get-color 'crust))
+(setq nano-color-faded (catppuccin-get-color 'overlay0))
 
 (require 'nano-faces)
 (require 'nano-modeline)
@@ -116,14 +123,15 @@
 (set-face-attribute 'window-divider nil
                       :foreground (face-background 'nano-face-default))
 (set-face-attribute 'window-divider-first-pixel nil
-                    :foreground nano-color-background)
-  ;;                  :foreground (face-background 'nano-face-subtle))
+                    :foreground nano-color-background
+                    :foreground (face-background 'nano-face-subtle))
+
 (set-face-attribute 'window-divider-last-pixel nil
                       :foreground nano-color-background)
 
 (set-face-attribute 'mode-line nil
                       :height 0.1
-		      :foreground nano-color-highlight
+		      :foreground nano-color-subtle
                       :background (face-background 'nano-face-default)
                       ;; :underline  (if (display-graphic-p)
                       ;;                 (face-background 'nano-face-subtle)
@@ -134,7 +142,7 @@
 
 (set-face-attribute 'mode-line-inactive nil
                     :height 0.1
-		    :foreground nano-color-highlight
+		    :foreground nano-color-subtle
                     :background (face-background 'nano-face-default)
                     ;; :underline (if (display-graphic-p)
                     ;;                (face-background 'nano-face-subtle)
@@ -162,17 +170,18 @@
 (set-face-foreground 'vertical-border nano-color-subtle)
 
 (set-face-attribute 'nano-face-header-default nil
-		    :background (doom-color 'bg-alt))
+		    :foreground nano-color-foreground
+		    :background nano-color-subtle)
 (set-face-attribute 'nano-face-header-strong nil
-		    :background (doom-color 'bg-alt))
-
+		    :foreground nano-color-foreground
+		    :background nano-color-subtle)
 (set-face-attribute 'nano-face-default nil
-		    :background (doom-color 'bg-alt))
+		    :foreground nano-color-foreground
+		    :background nano-color-subtle)
 
 (set-face-attribute 'font-lock-keyword-face nil
 		    :slant 'italic
-		    :weight 'semi-light
-		    :foreground (doom-color 'blue))
+		    :weight 'semi-light)
 (set-face-attribute 'font-lock-comment-face nil
 		    :slant 'italic)
 (set-face-attribute 'font-lock-type-face nil
@@ -180,7 +189,6 @@
 (set-face-attribute 'line-number nil
 		    :slant 'italic
 		    :weight 'semi-light)
-
 
 (use-package all-the-icons
   :straight t)
@@ -212,8 +220,7 @@
 (set-face-attribute 'dashboard-footer 'nil
 		    :height 140
 		    :slant 'italic
-		    :weight 'light
-		    :foreground (doom-color 'magenta))
+		    :weight 'light)
 
 (use-package all-the-icons-dired
   :straight '(:type git :host github :repo "jtbm37/all-the-icons-dired")
@@ -274,6 +281,9 @@
 		 "~/.emacs.d/straight/repos/yasnippet-snippets/snippets"))
   (yas-global-mode 1))
 
+(use-package java-snippets
+  :straight t)
+
 ;; Style
 (use-package rainbow-mode
   :straight t
@@ -317,6 +327,18 @@
   (define-key rust-mode-map (kbd "C-c C-o") 'rust-compile)
   (define-key rust-mode-map (kbd "C-c C-r") 'rust-run-clippy))
 
+(use-package yaml-mode
+  :straight t)
+
+(use-package lua-mode
+  :straight t)
+
+(use-package lsp-jedi
+  :straight t)
+
+(use-package lsp-java
+  :straight t)
+
 ;; Emacs like vscode
 (use-package lsp-mode
   :straight t
@@ -334,6 +356,8 @@
 	 (c++-mode . lsp)
 	 (rust-mode . lsp)
 	 (python-mode . lsp)
+	 (lua-mode . lsp)
+	 (java-mode . lsp)
          ;; if you want which-key integration
          (lsp-mode . lsp-enable-which-key-integration))
   :commands lsp)
@@ -349,11 +373,6 @@
 (use-package dap-mode
   :straight t)
 
-(use-package lsp-java
-  :straight t
-  :hook
-  (java-mode . lsp))
-
 (use-package dap-java)
 
 (use-package flycheck
@@ -362,8 +381,11 @@
   (global-flycheck-mode))
 
 ;; Corrector ortografico
-(setq ispell-program-name "aspell")
-(setq ispell-local-dictionary "espanol")
+(setenv "DICTIONARY" "es_ES")
+(setq ispell-program-name "hunspell")
+(setq ispell-hunspell-dict-paths '(("es_ES" "/usr/share/hunspell/es_ES.aff")
+				   ("en_US" "/usr/share/hunspell/en_US.aff")))
+(setq ispell-local-dictionary "es_ES")
 (setq ispell-local-dictionary-alist
       '(("es_ES" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil nil nil utf-8)))
 
@@ -376,13 +398,6 @@
   (flyspell-issue-welcome-flag nil)
   (flyspell-mode 1))
 
-
-(use-package flyspell-correct-ivy
-  :after flyspell
-  :bind (:map flyspell-mode-map
-	    ("C-:" . flyspell-correct-word-generic))
-  :custom (flyspell-correct-interface 'flyspell-correct-ivy))
-
 (use-package ispell
   :custom
   (ispell-silently-savep t))
@@ -390,7 +405,6 @@
 ;; Activar Flyspell en modo texto y modos relacionados
 (add-hook 'text-mode-hook
 	'(lambda () (flyspell-mode 1)))
-
 
 ;; Como habitualmente necesito cambiar entre el diccionario English y Spanish, uso esta función:
 (defun fd-switch-dictionary()
@@ -465,11 +479,18 @@
 (setq org-hide-emphasis-markers t)
 (setq org-format-latex-options '(plist-put org-format-latex-options :scale 2.0))
 
-;; Para mejorar los bullets y que sean más bonitos 
-(font-lock-add-keywords 'org-mode
-			'(("^ +\\([-*]\\) "
-			   (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+(use-package org-bullets
+  :straight t
+  :after org
+  :hook (org-mode . org-bullets-mode)
+  :custom
+  (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
 
+
+;; Para mejorar los bullets y que sean más bonitos 
+;; (font-lock-add-keywords 'org-mode
+;; 			'(("^ +\\([-*]\\) "
+;; 			   (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
 
 (defun move-line (n)
   "Move the current line up or down by N lines."
@@ -499,12 +520,6 @@
 
 ;; Adaptar el texto a la ventana
 (add-hook 'org-mode-hook 'visual-line-mode)
-
-;; Autocompletado en org-mode
-(use-package org-ac
-  :straight t
-  :config
-  (org-ac/config-default))
 
 (setq calendar-date-style 'iso)
 (setq calendar-week-start-day 1)
@@ -557,12 +572,6 @@
 	("HECHO"     . "#9ca0a4")
 	("CANCELADO" , "#383a42")	
 	("ARCHIVAR"  . "#a0bcf8")))
-
-;; Mejorando aún más el aspecto de los bullets gracias al paquete org-bullets
-(use-package org-bullets
-  :straight t
-  :config
-  (add-hook 'org-mode-hook (org-bullets-mode 1)))
 
 (setq org-log-done 'time)
 (setq org-log-into-drawer "LOGBOOK")
@@ -623,36 +632,13 @@ If FRAME is omitted or nil, use currently selected frame."
 
 (add-hook 'after-init-hook #'my/frame-recenter)
 (add-hook 'after-make-frame-functions #'my/frame-recenter)
-
-(use-package mpdel
-  :straight t
-  :config
-  (setq mpdel-prefix-key (kbd "C-. z"))
-  (mpdel-mode))
-
-(use-package emms
-  :straight t
-  :config
-  (require 'emms-setup)
-  (require 'emms-player-mpd)
-  (emms-all)
-  (setq emms-seek-second 5
-	emms-player-list '(emms-player-mpd)
-	emms-info-functions '(emms-info-tinytag)
-	emms-browser-covers 'emms-browser-cache-thumbnail-async
-	emms-player-mpd-server-name "localhost"
-	emms-player-mpd-server-port "6600")
-  (emms-add-directory-tree "~/Música"))
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be carril.
+ ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   '("2af6d337981b88f85980124e47e11cbff819200bba92648f59154a6ff35a7801" default))
- '(warning-suppress-log-types '((use-package) (use-package) (use-package) (holidays)))
- '(warning-suppress-types '((use-package) (use-package) (holidays))))
+ '(warning-suppress-log-types '((comp) (comp)))
+ '(warning-suppress-types '((comp))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -19,29 +19,25 @@ Xcursor.size: 16
 !Emacs.internalBorder: 30
 
 !! URxvt Appearance
-URxvt.font:           xft:font1:style=Regular:size=12:antialias=true:hinting=true,\
-                      xft:font2:style=Regular:size=12:antialias=true:hinting=true
+URxvt.font:           xft:font1:style=Regular:size=12:antialias=true:hinting=true
 URxvt.boldFont:       xft:font1:style=Bold:size=12:antialias=true:hinting=true
 URxvt.italicFont:     xft:font1:style=Italic:size=12:antialias=true:hinting=true
 URxvt.boldItalicfont: xft:font1:style=Bold Italic:size=12:antialias=true:hinting=true
-URxvt.letterSpace: -1
+URxvt.letterSpace: 0
 URxvt.lineSpace: 0
 URxvt.geometry: 82x24+420+120
 URxvt.title:Urxvt
-URxvt.internalBorder: 30
+URxvt.internalBorder: 5
 URxvt.cursorBlink: true
-URxvt.cursorUnderline: false
-URxvt.saveline: 2048
 URxvt.scrollBar:false
 URxvt.scrollBar_right:false
 URxvt.scrollstyle:urxvt
 URxvt.urgentOnBell: true
 URxvt.depth: 32
-!! URxvt.background: [80]#212B30
 URxvt.iso14755: false
 URxvt.termName: xterm-256color
 
-URxvt.perl-ext-common:  matcher,ibeamcursor,selection-to-clipboard,pasta,font-size,tabbed
+URxvt.perl-ext-common:  matcher,ibeamcursor,selection-to-clipboard,pasta,font-size
 URxvt.urlLauncher:      /usr/bin/firefox
 URxvt.matcher.button:   1
 
@@ -55,18 +51,13 @@ URxvt.keysym.C-slash:  font-size:show
 URxvt.keysym.Shift-Up: command:\033]720;1\007
 URxvt.keysym.Shift-Down: command:\033]721;1\007
 
-URxvt.tabbed.tabbar-fg: 2
-URxvt.tabbed.tabbar-bg: 0
-URxvt.tabbed.tab-fg: 3
-URxvt.tabbed.tab-bg: 0
-
 dwm.normbgcolor:       base00
 dwm.normfgcolor:       base07
 dwm.normbordercolor:   base00
 
 dwm.selbgcolor:        base00
-dwm.selfgcolor:	       base0E
-dwm.selbordercolor:    base0E
+dwm.selfgcolor:	       base05
+dwm.selbordercolor:    base05	
 
 ! ! special
 ! *.foreground: #93a1a1

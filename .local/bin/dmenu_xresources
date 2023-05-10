@@ -6,7 +6,7 @@ SB=$(xrdb -get color12)
 
 COLORS="-nb $NB -nf $NF -sb $SB -sf $NB"
 
-NEWTHEME=$(/bin/ls $HOME/.config/Xresources-themes | dmenu -i -c -l 10 -fn "Iosevka Nerd Font=pixelsize=14" -p "theme" $COLORS | awk '{print $1}')
+NEWTHEME=$(/bin/ls $HOME/.config/Xresources-themes | dmenu -i -c -l 10 -h 30 -fn "Iosevka Nerd Font=pixelsize=14" -p "theme" $COLORS | awk '{print $1}')
 
 if [ $NEWTHEME != "" ]
 then

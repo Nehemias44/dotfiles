@@ -2,24 +2,20 @@ autoload -U compinit promptinit
 compinit
 promptinit
 
-# Esto establecerá el prompt por defecto al tema walters
-# prompt walters
-
 zstyle ':completion:*' menu select
 
 setopt completealiases
 setopt HIST_IGNORE_DUPS
 
-# [[ -n "${key[PageUp]}"   ]]  && bindkey  "${key[PageUp]}"    history-beginning-search-backward
-# [[ -n "${key[PageDown]}" ]]  && bindkey  "${key[PageDown]}"  history-beginning-search-forward
-
+bindkey -e
 bindkey "^[[5~" history-beginning-search-backward #PageUp
 bindkey "^[[6~" history-beginning-search-forward #PageDown
 
 SAVEHIST=1000  # Save most-recent 1000 lines
 HISTFILE=~/.zsh_history
 
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+source $HOME/.zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
 
 eval "$(starship init zsh)"
 
@@ -29,16 +25,20 @@ fi
 
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.ghcup/bin:$PATH"
+export PATH="$HOME/.cabal/bin:$PATH"
 export TERM="xterm-256color"                   
 export HISTCONTROL=ignoredups:erasedups           
-export ALTERNATE_EDITOR=""                        
-export EDITOR="nano"                              
-export VISUAL="emacs"
-export BAT_THEME="ansi"
+export ALTERNATE_EDITOR="nvim"                        
+export EDITOR="nvim"                              
+# export VISUAL=""
+export BAT_THEME="Catppuccin-mocha"
 export RANGER_LOAD_DEFAULT_RC=FALSE
 
+
+
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME'
-alias agenda='/usr/bin/git --git-dir=$HOME/.agenda.git/ --work-tree=$HOME'
+alias agenda='/usr/bin/git --git-dir=$HOME/.agenda.git/ --work-tree=$HOME'n
 
 #alias reboot='sudo reboot'
 alias shutdown='shutdown -h now'
@@ -71,14 +71,6 @@ alias la='exa --icons -a --color=always --group-directories-first'
 alias ll='exa --icons -l --color=always --group-directories-first'  
 alias lt='exa --icons -aT --color=always --group-directories-first' 
 alias l.='exa -a | egrep "^\."'
-
-# pacman and yay
-alias pacsyu='sudo pacman -Syu'                  # update only standard pkgs
-alias pacsyyu='sudo pacman -Syyu'                # Refresh pkglist & update standard pkgs
-alias yaysua='yay -Sua --noconfirm'              # update only AUR pkgs (yay)
-alias yaysyu='yay -Syu --noconfirm'              # update standard pkgs and AUR pkgs (yay)
-alias unlock='sudo rm /var/lib/pacman/db.lck'    # remove pacman lock
-alias cleanup='sudo pacman -Rns $(pacman -Qtdq)' # remove orphaned packages
 
 alias xlog='bat $HOME/.local/share/xorg/Xorg.0.log'
 alias xerr='cat $HOME/.local/share/xorg/Xorg.0.log | grep "(EE)"'
