@@ -1,9 +1,12 @@
+fpath+=$HOME/.zfunc
+
 autoload -U compinit promptinit
 compinit
 promptinit
 
 zstyle ':completion:*' menu select
 
+setopt correctall
 setopt completealiases
 setopt HIST_IGNORE_DUPS
 
@@ -14,8 +17,8 @@ bindkey "^[[6~" history-beginning-search-forward #PageDown
 SAVEHIST=1000  # Save most-recent 1000 lines
 HISTFILE=~/.zsh_history
 
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
-source $HOME/.zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
+source /usr/share/zsh/site-functions/zsh-syntax-highlighting.zsh 
+# source $HOME/.zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
 
 eval "$(starship init zsh)"
 
@@ -27,6 +30,7 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.ghcup/bin:$PATH"
 export PATH="$HOME/.cabal/bin:$PATH"
+export PATH="$HOME/.node/node_modules/.bin/:$PATH"
 export TERM="xterm-256color"                   
 export HISTCONTROL=ignoredups:erasedups           
 export ALTERNATE_EDITOR="nvim"                        
@@ -36,12 +40,11 @@ export BAT_THEME="Catppuccin-mocha"
 export RANGER_LOAD_DEFAULT_RC=FALSE
 
 
-
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME'
 alias agenda='/usr/bin/git --git-dir=$HOME/.agenda.git/ --work-tree=$HOME'n
 
-#alias reboot='sudo reboot'
-alias shutdown='shutdown -h now'
+alias reboot='loginctl reboot'
+alias shutdown='loginctl poweroff'
 
 alias vim='nvim'
 alias cat='bat'

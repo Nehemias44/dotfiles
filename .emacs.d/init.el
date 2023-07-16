@@ -1,14 +1,14 @@
 (setq default-frame-alist
       (append (list
-	       '(font . "MonoLisa-Light-12")
+	       '(font . "Source Code Pro-12")
 	       '(min-height . 1)
-               '(height     . 48)
+               '(height     . 60)
 	       '(min-width  . 1)
-               '(width      . 200)
+               '(width      . 100)
 ;;	       '(left . 40)
 ;;               '(top . 50)
                '(vertical-scroll-bars . nil)
-               '(internal-border-width . 30)
+               '(internal-border-width . 40)
                '(left-fringe    . 1)
                '(right-fringe   . 1)
                '(tool-bar-lines . 0)
@@ -41,8 +41,7 @@
       scroll-conservatively     1000)
 
 (setq-default org-support-shift-select  t
-	      c-basic-offset 8
-	      line-spacing 0.1)
+	      c-basic-offset 8)
 
 (fset 'yes-or-no-p 'y-or-n-p)
 (electric-pair-mode +1)
@@ -53,6 +52,7 @@
 (require 'display-line-numbers)
 (setq display-line-numbers-type 'relative)
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
+(global-hl-line-mode +1)
 
 (setq-default c-basic-offset 8)
 
@@ -84,14 +84,14 @@
 ;; (straight-use-package
 ;;   '(rose-pine-emacs :type git :host github :repo "thongpv87/rose-pine-emacs"))
 
-;; (load-theme 'rose-pine-moon t)
+;; (load-theme 'rose-pine-down t)
 
-(straight-use-package
- '(catppuccin :type git :host github :repo "catppuccin/emacs"))
+;; (straight-use-package
+;;  '(catppuccin :type git :host github :repo "catppuccin/emacs"))
 
-(load-theme 'catppuccin t)
-(setq catppuccin-flavor 'mocha) ;; or 'latte, 'macchiato, or 'mocha
-(catppuccin-reload)
+;; (load-theme 'catppuccin t)
+;; (setq catppuccin-flavor 'mocha) ;; or 'latte, 'macchiato, or 'mocha
+;; (catppuccin-reload)
 
 ;; (use-package doom-themes
 ;;   :straight t
@@ -104,17 +104,28 @@
   '(nano-emacs :type git :host github :repo "rougier/nano-emacs"))
 
 (require 'nano-theme)
-(require 'nano-theme-dark)
+(require 'nano-theme-light)
 
-(setq nano-color-background (catppuccin-get-color 'base))
-(setq nano-color-foreground (catppuccin-get-color 'text))
-(setq nano-color-highlight (catppuccin-get-color 'subtext0))
-(setq nano-color-critical (catppuccin-get-color 'red))
-(setq nano-color-salient (catppuccin-get-color 'mauve))
-(setq nano-color-strong "#232634")
-(setq nano-color-popout (catppuccin-get-color 'green))
-(setq nano-color-subtle (catppuccin-get-color 'crust))
-(setq nano-color-faded (catppuccin-get-color 'overlay0))
+;; ;; Colors for the CatppuccinMocha theme
+;; (setq nano-color-background (catppuccin-get-color 'base))
+;; (setq nano-color-foreground (catppuccin-get-color 'text))
+;; (setq nano-color-highlight (catppuccin-get-color 'subtext0))
+;; (setq nano-color-critical (catppuccin-get-color 'red))
+;; (setq nano-color-salient (catppuccin-get-color 'mauve))
+;; (setq nano-color-strong "#232634")
+;; (setq nano-color-popout (catppuccin-get-color 'green))
+;; (setq nano-color-subtle (catppuccin-get-color 'crust))
+;; (setq nano-color-faded (catppuccin-get-color 'overlay0))
+
+(setq nano-color-background "#faf4ed")
+(setq nano-color-foreground "#575279")
+(setq nano-color-highlight  "#f2e9de")
+(setq nano-color-critical   "#b4637a")
+(setq nano-color-salient    "#907aa9")
+(setq nano-color-strong     "#6e6a86")
+(setq nano-color-popout     "#56949f")
+(setq nano-color-subtle     "#f2e9de")
+(setq nano-color-faded      "#6e6a86")
 
 (require 'nano-faces)
 (require 'nano-modeline)
@@ -153,7 +164,8 @@
                     :box nil)
 
 (set-face-attribute 'header-line nil
-                    :weight 'light
+		    ;;:font "Iosevka Nerd Font Light-11"
+                    ;;:weight 'light
                     :foreground (face-foreground 'nano-face-default)
                     :background (face-background 'nano-face-default)
                     :overline nil
@@ -169,6 +181,12 @@
 
 (set-face-foreground 'vertical-border nano-color-subtle)
 
+
+(set-face-attribute 'default nil
+		    ;;:font "Iosevka Nerd Font Light-11"
+		    :background nano-color-background
+		    :foreground nano-color-foreground)
+
 (set-face-attribute 'nano-face-header-default nil
 		    :foreground nano-color-foreground
 		    :background nano-color-subtle)
@@ -179,16 +197,47 @@
 		    :foreground nano-color-foreground
 		    :background nano-color-subtle)
 
+(set-face-attribute 'region nil
+		    :background nano-color-faded
+		    :foreground nano-color-foreground)
+
 (set-face-attribute 'font-lock-keyword-face nil
+		    :foreground "#286983"
 		    :slant 'italic
-		    :weight 'semi-light)
+		    :weight 'semi-bold)
+
 (set-face-attribute 'font-lock-comment-face nil
+		    :foreground "#9893a5"
 		    :slant 'italic)
+
+(set-face-attribute 'font-lock-string-face nil
+		    :foreground "#ea9d34")
+(set-face-attribute 'font-lock-constant-face nil
+		    :foreground "#286983")
+(set-face-attribute 'font-lock-variable-name-face nil
+		    :foreground "#d7827e"
+		    :slant 'italic)
+(set-face-attribute 'font-lock-function-name-face nil
+		    :foreground "#b4637a"
+		    :slant 'italic)
+
 (set-face-attribute 'font-lock-type-face nil
-		    :slant 'italic)
+		    :foreground "#56949f"
+		    :slant 'italic
+		    :weight 'semi-bold)
+
 (set-face-attribute 'line-number nil
 		    :slant 'italic
-		    :weight 'semi-light)
+		    :weight 'light)
+
+(set-face-attribute 'line-number-current-line nil
+		    :background nano-color-highlight
+		    :foreground nano-color-strong
+		    :slant 'italic
+		    :weight 'bold)
+
+(set-face-attribute 'hl-line nil
+		    :background nano-color-highlight)
 
 (use-package all-the-icons
   :straight t)
@@ -305,15 +354,15 @@
   :config
   (rainbow-delimiters-mode +1))
 
-(set-face-attribute 'rainbow-delimiters-depth-1-face 'nil :weight 'bold)
-(set-face-attribute 'rainbow-delimiters-depth-2-face 'nil :weight 'bold)
-(set-face-attribute 'rainbow-delimiters-depth-3-face 'nil :weight 'bold)
-(set-face-attribute 'rainbow-delimiters-depth-4-face 'nil :weight 'bold)
-(set-face-attribute 'rainbow-delimiters-depth-5-face 'nil :weight 'bold)
-(set-face-attribute 'rainbow-delimiters-depth-6-face 'nil :weight 'bold)
-(set-face-attribute 'rainbow-delimiters-depth-7-face 'nil :weight 'bold)
-(set-face-attribute 'rainbow-delimiters-depth-8-face 'nil :weight 'bold)
-(set-face-attribute 'rainbow-delimiters-depth-9-face 'nil :weight 'bold)
+(set-face-attribute 'rainbow-delimiters-depth-1-face 'nil :weight 'bold :foreground "#286983")
+(set-face-attribute 'rainbow-delimiters-depth-2-face 'nil :weight 'bold :foreground "#d7827e")
+(set-face-attribute 'rainbow-delimiters-depth-3-face 'nil :weight 'bold :foreground "#907aa9")
+(set-face-attribute 'rainbow-delimiters-depth-4-face 'nil :weight 'bold :foreground "#56949f")
+(set-face-attribute 'rainbow-delimiters-depth-5-face 'nil :weight 'bold :foreground "#ea9d34")
+(set-face-attribute 'rainbow-delimiters-depth-6-face 'nil :weight 'bold :foreground "#b4637a")
+(set-face-attribute 'rainbow-delimiters-depth-7-face 'nil :weight 'bold :foreground "#286983")
+(set-face-attribute 'rainbow-delimiters-depth-8-face 'nil :weight 'bold :foreground "#d7827e")
+(set-face-attribute 'rainbow-delimiters-depth-9-face 'nil :weight 'bold :foreground "#907aa9")
 
 (use-package rust-mode
   :straight t
@@ -486,12 +535,6 @@
   :custom
   (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
 
-
-;; Para mejorar los bullets y que sean más bonitos 
-;; (font-lock-add-keywords 'org-mode
-;; 			'(("^ +\\([-*]\\) "
-;; 			   (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
-
 (defun move-line (n)
   "Move the current line up or down by N lines."
   (interactive "p")
@@ -566,9 +609,9 @@
 		  "|" "HECHO(h!)" "CANCELADO(c!)" "ARCHIVAR(a!)")))
 
 (setq org-todo-keyword-faces
-      '(("PORHACER"  . (:foreground "#50a14f" :weight bold :slant italic))
-	("ENPROCESO" . "#a626a4")
-	("BLOQUEADO" . "#e45649")
+      '(("PORHACER"  . (:foreground "#286983" :weight bold :slant italic))
+	("ENPROCESO" . "#907aa9")
+	("BLOQUEADO" . "#d7827e")
 	("HECHO"     . "#9ca0a4")
 	("CANCELADO" , "#383a42")	
 	("ARCHIVAR"  . "#a0bcf8")))
@@ -632,6 +675,143 @@ If FRAME is omitted or nil, use currently selected frame."
 
 (add-hook 'after-init-hook #'my/frame-recenter)
 (add-hook 'after-make-frame-functions #'my/frame-recenter)
+
+(use-package twittering-mode
+  :straight '(:type git :host github :repo "hayamiz/twittering-mode")
+  :config
+  (with-eval-after-load 'twittering-mode 
+  (defun *twittering-generate-format-table (status-sym prefix-sym)
+    `(("%" . "%")
+      ("}" . "}")
+      ("#" . (cdr (assq 'id ,status-sym)))
+      ("'" . (when (cdr (assq 'truncated ,status-sym))
+               "..."))
+      ("c" .
+       (let ((system-time-locale "C"))
+         (format-time-string "%a %b %d %H:%M:%S %z %Y"
+                             (cdr (assq 'created-at ,status-sym)))))
+      ("d" . (cdr (assq 'user-description ,status-sym)))
+      ("f" .
+       (twittering-make-string-with-source-property
+        (cdr (assq 'source ,status-sym)) ,status-sym))
+      ("i" .
+       (when (and twittering-icon-mode window-system)
+         (let ((url
+                (cond
+                 ((and twittering-use-profile-image-api
+                       (eq twittering-service-method 'twitter)
+                       (or (null twittering-convert-fix-size)
+                           (member twittering-convert-fix-size '(48 73))))
+                  (let ((user (cdr (assq 'user-screen-name ,status-sym)))
+                        (size
+                         (if (or (null twittering-convert-fix-size)
+                                 (= 48 twittering-convert-fix-size))
+                             "normal"
+                           "bigger")))
+                    (format "http://%s/%s/%s.xml?size=%s" twittering-api-host
+                            (twittering-api-path "users/profile_image") user size)))
+                 (t
+                  (cdr (assq 'user-profile-image-url ,status-sym))))))
+           (twittering-make-icon-string nil nil url))))
+      ("I" .
+       (let* ((entities (cdr (assq 'entity ,status-sym)))
+              text)
+         (mapc (lambda (url-info)
+                 (setq text (or (cdr (assq 'media-url url-info)) "")))
+               (cdr (assq 'media entities)))
+         (if (string-equal "" text)
+             text
+           (let ((twittering-convert-fix-size 360))
+             (twittering-make-icon-string nil nil text)))))
+      ("j" . (cdr (assq 'user-id ,status-sym)))
+      ("L" .
+       (let ((location (or (cdr (assq 'user-location ,status-sym)) "")))
+         (unless (string= "" location)
+           (concat " [" location "]"))))
+      ("l" . (cdr (assq 'user-location ,status-sym)))
+      ("p" . (when (cdr (assq 'user-protected ,status-sym))
+               "[x]"))
+      ("r" .
+       (let ((reply-id (or (cdr (assq 'in-reply-to-status-id ,status-sym)) ""))
+             (reply-name (or (cdr (assq 'in-reply-to-screen-name ,status-sym))
+                             ""))
+             (recipient-screen-name
+              (cdr (assq 'recipient-screen-name ,status-sym))))
+         (let* ((pair
+                 (cond
+                  (recipient-screen-name
+                   (cons (format "sent to %s" recipient-screen-name)
+                         (twittering-get-status-url recipient-screen-name)))
+                  ((and (not (string= "" reply-id))
+                        (not (string= "" reply-name)))
+                   (cons (format "in reply to %s" reply-name)
+                         (twittering-get-status-url reply-name reply-id)))
+                  (t nil)))
+                (str (car pair))
+                (url (cdr pair))
+                (properties
+                 (list 'mouse-face 'highlight 'face 'twittering-uri-face
+                       'keymap twittering-mode-on-uri-map
+                       'uri url
+                       'front-sticky nil
+                       'rear-nonsticky t)))
+           (when (and str url)
+             (concat " " (apply 'propertize str properties))))))
+      ("R" .
+       (let ((retweeted-by
+              (or (cdr (assq 'retweeting-user-screen-name ,status-sym)) "")))
+         (unless (string= "" retweeted-by)
+           (concat " (retweeted by " retweeted-by ")"))))
+      ("S" .
+       (twittering-make-string-with-user-name-property
+        (cdr (assq 'user-name ,status-sym)) ,status-sym))
+      ("s" .
+       (twittering-make-string-with-user-name-property
+        (cdr (assq 'user-screen-name ,status-sym)) ,status-sym))
+      ("U" .
+       (twittering-make-fontified-tweet-unwound ,status-sym))
+      ;; ("D" .
+      ;;  (twittering-make-fontified-tweet-unwound ,status-sym))
+      ("T" .
+       ,(twittering-make-fontified-tweet-text
+         `(twittering-make-fontified-tweet-text-with-entity ,status-sym)
+         twittering-regexp-hash twittering-regexp-atmark))
+      ("t" .
+       ,(twittering-make-fontified-tweet-text
+         `(twittering-make-fontified-tweet-text-with-entity ,status-sym)
+         twittering-regexp-hash twittering-regexp-atmark))
+      ("u" . (cdr (assq 'user-url ,status-sym)))))
+  (advice-add #'twittering-generate-format-table :override #'*twittering-generate-format-table)
+  (defface twitter-divider
+    `((t (:underline (:color "grey"))))
+    "The vertical divider between tweets."
+    :group 'twittering-mode)
+  (setq twittering-icon-mode t
+        twittering-use-icon-storage t
+        twittering-convert-fix-size 40
+        twittering-status-format "
+  %i  %FACE[font-lock-function-name-face]{  @%s}  %FACE[italic]{%@}  %FACE[error]{%FIELD-IF-NONZERO[❤ %d]{favorite_count}}  %FACE[warning]{%FIELD-IF-NONZERO[↺ %d]{retweet_count}}
+
+%FOLD[   ]{%FILL{%t}
+%QT{
+%FOLD[   ]{%FACE[font-lock-function-name-face]{@%s}\t%FACE[shadow]{%@}
+%FOLD[ ]{%FILL{%t}}
+}}}
+
+    %I
+
+%FACE[twitter-divider]{                                                                                                                                                                                  }
+")))
+
+(defun +twitter/rerender-all ()
+  (interactive)
+  (dolist (buf (doom-buffers-in-mode 'twittering-mode (buffer-list)))
+    (with-current-buffer buf
+      (twittering-rerender-timeline-all buf t)
+      (setq-local line-spacing 0.2)
+      (goto-char (point-min))
+      )))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
