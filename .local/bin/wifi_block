@@ -3,7 +3,7 @@
 INTERFACE=$(ip link | grep -o 'wl[a-z0-9]*' | head -n 1)
 STATE=$(iw $INTERFACE link)
 
-COLOR=$(xrdb -get color10)
+COLOR=$(xrdb -get color5)
 COLOR="^c$COLOR^"
 RESET="^d^"
 ICON="  "

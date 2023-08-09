@@ -2,7 +2,7 @@
 
 DATE=$(date '+%a %d %I:%M%p')
 ICON=" "
-COLOR=$(xrdb -get color14)
+COLOR=$(xrdb -get color6)
 COLOR="^c$COLOR^"
 RESET="^d^"
 

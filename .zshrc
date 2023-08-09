@@ -1,3 +1,9 @@
+fpath+=$HOME/.zfunc
+
+show_colour() {
+    printf '\e]4;1;%s\a\e[0;41m  \e[m' "$1"
+}
+
 autoload -U compinit promptinit
 compinit
 promptinit
@@ -14,8 +20,11 @@ bindkey "^[[6~" history-beginning-search-forward #PageDown
 SAVEHIST=1000  # Save most-recent 1000 lines
 HISTFILE=~/.zsh_history
 
+. /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
-source $HOME/.zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 
+#source $HOME/.zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
 
 eval "$(starship init zsh)"
 
@@ -27,18 +36,20 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.ghcup/bin:$PATH"
 export PATH="$HOME/.cabal/bin:$PATH"
+export PATH="$HOME/.local/share/gem/ruby/3.2.0/bin:$PATH"
 export TERM="xterm-256color"                   
 export HISTCONTROL=ignoredups:erasedups           
 export ALTERNATE_EDITOR="nvim"                        
 export EDITOR="nvim"                              
 # export VISUAL=""
-export BAT_THEME="Catppuccin-mocha"
+export BAT_THEME="ansi"
 export RANGER_LOAD_DEFAULT_RC=FALSE
 
 
+alias Tamzen-20=Tamzen10x20r
 
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME'
-alias agenda='/usr/bin/git --git-dir=$HOME/.agenda.git/ --work-tree=$HOME'n
+alias agenda='/usr/bin/git --git-dir=$HOME/.agenda.git/ --work-tree=$HOME'
 
 #alias reboot='sudo reboot'
 alias shutdown='shutdown -h now'
@@ -65,11 +76,10 @@ alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 
 # Cambiando "ls" por "exa"
-alias ls='exa --icons --color=always --group-directories-first'
-alias ls='exa --icons -al --color=always --group-directories-first' 
-alias la='exa --icons -a --color=always --group-directories-first'  
-alias ll='exa --icons -l --color=always --group-directories-first'  
-alias lt='exa --icons -aT --color=always --group-directories-first' 
+alias ls='exa -al --color=always --group-directories-first' 
+alias la='exa -a --color=always --group-directories-first'  
+alias ll='exa -l --color=always --group-directories-first'  
+alias lt='exa -aT --color=always --group-directories-first' 
 alias l.='exa -a | egrep "^\."'
 
 alias xlog='bat $HOME/.local/share/xorg/Xorg.0.log'
@@ -86,3 +96,5 @@ alias yta-opus="youtube-dl --extract-audio --audio-format opus "
 alias yta-vorbis="youtube-dl --extract-audio --audio-format vorbis "
 alias yta-wav="youtube-dl --extract-audio --audio-format wav "
 alias ytv-best="youtube-dl -f bestvideo+bestaudio "
+
+export PATH=$PATH:/home/nehemias/.spicetify

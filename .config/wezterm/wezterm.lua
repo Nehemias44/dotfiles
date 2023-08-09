@@ -1,32 +1,32 @@
 local wezterm = require 'wezterm'
 local act = wezterm.action
 local colors = require('lua/rose-pine-dawn').colors()
-local window_frame = require('lua/rose-pine-dawn').window_frame()
+-- local window_frame = require('lua/rose-pine-dawn').window_frame()
 
 local config = {}
 
-config.font = wezterm.font('MonoLisa', { weight = Light})
-
-config.font_size = 11
-config.color_scheme = "Catppuccin Mocha"
--- config.colors = colors
-config.line_height = 0.9
+config.font = wezterm.font "Iosevka Nerd Font"
+config.font_size = 12
+-- config.color_scheme = "Catppuccin Mocha"
+config.colors = colors
+config.line_height = 1.0
 config.adjust_window_size_when_changing_font_size = false
 config.default_cursor_style = 'BlinkingBar'
 config.animation_fps = 1
 config.cursor_blink_ease_in = 'Constant'
 config.cursor_blink_ease_out = 'Constant'
+config.enable_tab_bar = false
 config.tab_bar_at_bottom = false
 config.show_tab_index_in_tab_bar = true
 config.tab_max_width = 56
 config.use_fancy_tab_bar = false
-config.initial_cols = 98
-config.initial_rows = 24
+config.initial_cols = 95
+config.initial_rows = 23
 config.window_padding = {
-  left = 20,
-  right = 20,
-  top = 20,
-  bottom = 20,
+  left = 30,
+  right = 30,
+  top = 30,
+  bottom = 30,
 }
 
 

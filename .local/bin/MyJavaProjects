@@ -1,0 +1,37 @@
+#!/bin/sh
+
+NB=$(xrdb -get background)
+NF=$(xrdb -get color10)
+SB=$NF
+SF=$NB
+
+FONT="Iosevka Nerd Font:size=14"
+COLORS="-nb $NB -nf $NF -sb $SB -sf $SF"
+DMENU="dmenu -bw 3 -h 30 -i -c -l 20 $COLORS"
+
+PROJETC_DIR=$HOME/Documentos/Java
+
+if [ -f /tmp/CurrentJavaProject ]
+then
+    CURREN_PROJECT=$(/bin/cat /tmp/CurrentJavaProject)
+    OPTION=$(echo "Build project\nRun project\nTest project" | $DMENU)
+    case $OPTION in
+	"Build project") 
+	    cd $CURREN_PROJECT && ./gradlew build
+	    ;;
+	"Run project")
+	    cd $CURREN_PROJECT && ./gradlew run
+	    ;;
+	"Test project")
+	    cd $CURREN_PROJECT && ./gradlew test && surf $CURREN_PROJECT/app/build/reports/tests/test/index.html
+	    ;;
+	*)
+	    exit 1
+	    ;;
+    esac
+    exit 0
+fi
+
+SELECT_PROJECT=$(ls $PROJETC_DIR | dmenu -c -l 10)
+
+echo $PROJETC_DIR/$SELECT_PROJECT > /tmp/CurrentJavaProject
