@@ -5,21 +5,19 @@ NF=$(xrdb -get foreground)
 SB=$(xrdb -get color10)
 
 COLORS="-nb $NB -nf $NF -sb $SB -sf $NB"
-FONT="Tamzen:size=14"
-DMENU="dmenu -bw 3 -i -c -l 10 -h 30 -fn $FONT"
+DMENU="dmenu -bw 3 -i -c -l 10 -h 30"
 
 NEWTHEME=$(/bin/ls $HOME/.config/Xresources-themes | $DMENU -p "theme =>" $COLORS | awk '{print $1}')
 
-if [ $NEWTHEME != "" ]
+if [ $NEWTHEME ]
 then
     echo '#!/bin/sh' > $HOME/.theme
     echo export "THEME_SELECT=$HOME/.config/Xresources-themes/$NEWTHEME" >> $HOME/.theme
     echo 'ln -sf $THEME_SELECT /tmp/Theme' >> $HOME/.theme
     . $HOME/.theme
-    xrdb -merge $HOME/.Xresources
+    xrdb -merge $HOME/.Xresources    
     pidof st | xargs kill -s USR1
-    dwmc reloadxres
-    xsetroot -solid $(xrdb -get background)
+    dwmc reloadxres    
 else
     exit 1
 fi

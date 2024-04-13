@@ -1,6 +1,6 @@
 ! Rose Pine Dawn
 
-#define base00 #f2e9de
+#define base00 #f2e9e1
 #define base01 #b4637a
 #define base02 #286983
 #define base03 #ea9d34
@@ -8,7 +8,7 @@
 #define base05 #907aa9
 #define base06 #d7827e
 #define base07 #575279
-#define base08 #6e6a86
+#define base08 #9893a5
 #define base09 #b4637a
 #define base0A #286983
 #define base0B #ea9d34
@@ -17,9 +17,9 @@
 #define base0E #d7827e
 #define base0F #575279
 
-*.background: #faf4ed
-*.foreground: base07
-*.cursorColor:base07
+*.background:  #faf4ed
+*.foreground:  #575279
+*.cursorColor: #575279
 
 *.color0:    base00
 *.color1:    base01

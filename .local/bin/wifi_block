@@ -1,9 +1,9 @@
-#!/bin/bash
+#!/bin/sh
 
-INTERFACE=$(ip link | grep -o 'wl[a-z0-9]*' | head -n 1)
+INTERFACE=$(ls /sys/class/net | grep -o 'wl[a-z0-9]*')
 STATE=$(iw $INTERFACE link)
 
-COLOR=$(xrdb -get color5)
+COLOR=$(xrdb -get color13)
 COLOR="^c$COLOR^"
 RESET="^d^"
 ICON="  "

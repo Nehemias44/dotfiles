@@ -9,3 +9,4 @@
   (lambda ()
     (setq gc-cons-threshold 300000000 ; 300mb
           gc-cons-percentage 0.1)))
+(put 'dired-find-alternate-file 'disabled nil)

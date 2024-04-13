@@ -14,7 +14,7 @@ PROJETC_DIR=$HOME/Documentos/Java
 if [ -f /tmp/CurrentJavaProject ]
 then
     CURREN_PROJECT=$(/bin/cat /tmp/CurrentJavaProject)
-    OPTION=$(echo "Build project\nRun project\nTest project" | $DMENU)
+    OPTION=$(echo -e "Build project\nRun project\nTest project" | $DMENU)
     case $OPTION in
 	"Build project") 
 	    cd $CURREN_PROJECT && ./gradlew build

@@ -16,7 +16,7 @@ while true; do
 	exit
     fi
     
-    xsetroot -name " $(cpu_block) | $(mem_block) | $(batt_block) | $(wifi_block) | $(date_block) "
+    xsetroot -name "  $(cpu_block)    $(mem_block)    $(batt_block)    $(wifi_block)    $(date_block)  "
     sleep 1
     
 done

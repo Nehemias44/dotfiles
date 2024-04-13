@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/sh
 
-DATE=$(date '+%a %d %I:%M%p')
+DATE=$(date '+%a %d %I:%M %p')
 ICON=" "
 COLOR=$(xrdb -get color6)
 COLOR="^c$COLOR^"

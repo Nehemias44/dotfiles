@@ -17,7 +17,6 @@
 #define base0E #56B6C2
 #define base0F #ABB2BF
 
-
 *.background:   #282C34
 *.foreground:   #ABB2BF
 *.cursorColor:  #ABB2BF

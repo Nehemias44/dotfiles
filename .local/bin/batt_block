@@ -2,10 +2,41 @@
 
 CAPACITY=$(/bin/cat /sys/class/power_supply/BAT0/capacity)
 STATUS=$(/bin/cat /sys/class/power_supply/BAT0/status)
-COLOR=$(xrdb -get color4)
+COLOR=$(xrdb -get color12)
 COLOR="^c$COLOR^"
 RESET="^d^"
-ICON="BAT:"
+ICON=""
 
+if [ $CAPACITY -ge 0 ] & [ $CAPACITY -le 10 ]
+then
+    ICON="󰁺"
+elif [ $CAPACITY -ge 11 ] & [ $CAPACITY -le 20 ]
+then
+    ICON="󰁻"
+elif [ $CAPACITY -ge 21 ] & [ $CAPACITY -le 30 ]
+then
+     ICON="󰁼"
+elif [ $CAPACITY -ge 31 ] & [ $CAPACITY -le 40 ]
+then
+    ICON="󰁽"
+elif [ $CAPACITY -ge 41 ] & [ $CAPACITY -le 50 ]
+then
+    ICON="󰁾"
+elif [ $CAPACITY -ge 51 ] & [ $CAPACITY -le 60 ]
+then
+    ICON="󰁿"
+elif [ $CAPACITY -ge 61 ] & [ $CAPACITY -le 70 ]
+then
+    ICON="󰂀"    
+elif [ $CAPACITY -ge 71 ] & [ $CAPACITY -le 80 ]
+then
+    ICON="󰂁"
+elif [ $CAPACITY -ge 81 ] & [ $CAPACITY -le 90 ]
+then
+    ICON="󰂂"
+elif [ $CAPACITY -ge 91 ] & [ $CAPACITY -le 100 ]
+then
+    ICON="󰁹"        
+fi
 
-echo $COLOR$ICON$CAPACITY%"("$STATUS")"$RESET
+echo $COLOR$ICON" "$CAPACITY%"("$STATUS")"$RESET

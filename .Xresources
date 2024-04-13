@@ -1,7 +1,7 @@
 #include </tmp/Theme>
 
 !! Xdefaults
-#define font1   Tamzen-12
+#define font1   Iosevka Nerd Font
 !#define font2   Iosevka Nerd Font
 
 Xft.dpi:        96
@@ -53,10 +53,10 @@ URxvt.keysym.Shift-Down: command:\033]721;1\007
 
 dwm.normbgcolor:       base00
 dwm.normfgcolor:       base07
-dwm.normbordercolor:   base07
+dwm.normbordercolor:   base08
 
 dwm.selbgcolor:        base00
-dwm.selfgcolor:	       base0A
+dwm.selfgcolor:	       base0F
 dwm.selbordercolor:    base00	
 
 ! ! special
