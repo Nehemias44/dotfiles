@@ -70,7 +70,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git fzf zsh-interactive-cd zsh-fzf-history-search fzf-alias)
+plugins=(git fzf zsh-interactive-cd)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -109,7 +109,6 @@ source $ZSH/oh-my-zsh.sh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-source $HOME/.oh-my-zsh/custom/plugins/fzf-git/fzf-git 
 
 # export FZF_DEFAULT_OPTS="
 # 	--color=fg:#797593,bg:#faf4ed,hl:#d7827e

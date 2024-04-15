@@ -91,6 +91,9 @@
   (straight-use-package
    '(svg-tag-mode :type git :host github :repo "rougier/svg-tag-mode"))
 
+    (straight-use-package
+     '(sideframe :type git :host github :repo "rougier/sideframe"))
+
 #+END_SRC
 ** Encoding
 #+BEGIN_SRC emacs-lisp
@@ -131,6 +134,8 @@
 
   (let (message-log-max)
     (recentf-mode 1))
+
+  (setq system-time-locale "C")
 
 
 #+END_SRC
@@ -329,8 +334,6 @@
 #+BEGIN_SRC emacs-lisp
 
   (load-file "~/.emacs.d/elisp/my-header-line.el")
-  (setq mode-line-format (list ""))
-  (setq-default mode-line-format (list ""))
 
   (add-hook 'prog-mode-hook #'my/header-line-mode)
   (add-hook 'org-mode-hook #'my/header-line-mode)
@@ -889,36 +892,35 @@
    (add-to-list 'org-modules 'org-habit)
    (require 'org-habit)
    (require 'org-agenda)
-   					;(require 'elegant-agenda-mode)
+                                        ;(require 'elegant-agenda-mode)
 
    (global-set-key (kbd "C-c a") 'org-agenda)
 
    ;; Files
-   (setq org-agenda-files '("~/Documentos/Org/Academic.org"
-    			 "~/Documentos/Org/Agenda.org"
-    			 "~/Documentos/Org/Inbox.org"
-    			 "~/Documentos/Org/Todo.org"
-    			 "~/Documentos/Org/Work.org"
-   			 "~/Documentos/Org/Habits.org"))
+   (setq org-agenda-files '("~/Documentos/Repos/agenda/Inbox.org"
+                         "~/Documentos/Repos/agenda/Tasks.org"
+                         "~/Documentos/Repos/agenda/Work.org"
+                         "~/Documentos/Repos/agenda/Habits.org"
+                         "~/Documentos/Repos/agenda/Notes.org"
+                         "~/Documentos/Repos/agenda/Projects.org"))
 
    (setq org-archive-location
-         "~/Documentos/Org/Archivo/%s_archivo.org::datetree/")
+         "~/Documentos/Repos/agenda/Archivo/%s_store.org::datetree/")
 
    ;; Keywords
-
    (setq org-todo-keywords
          '((sequence "TODO(t!)"
-    		  "PROCESSING(p!)"	  
-    		  "LOCKED(l!)"   		  
-    		  "|" "CANCELLED(c!)" "DONE(d!)" "STORE(s!)")))
+                  "PROCESSING(p!)"	  
+                  "LOCKED(l!)"   		  
+                  "|" "CANCELLED(c!)" "DONE(d!)" "STORE(s!)")))
    ;; Faces
    (setq org-todo-keyword-faces
-         '(("TODO"       . "#b4637a")
-    	("PROCESSING" . "#907aa9")
-    	("LOCKED"     . "#d7827e")
-    	("DONE"       . "#797593")
-    	("CANCELLED"  . "#f4ede8")	
-    	("STORE"      . "#ea9d34")))
+         (quote (("TODO"       :inherit org-todo)
+                 ("DONE"       :inherit org-done)
+                 ("PROCESSING" :inherit font-lock-keyword-face)
+                 ("LOCKED"     :inherit font-lock-warning)
+                 ("CANCELED"   :inherit font-lock-comment-face)
+                 ("STORE"      :inherit font-lock-doc-face))))
 
    (setq org-agenda-inhibit-startup t
          org-agenda-include-diary nil
@@ -937,7 +939,7 @@
          org-log-into-drawer "LOGBOOK"
          org-tags-column 70
          org-refile-targets '((nil :maxlevel . 1)
-   			   (org-agenda-files :maxlevel . 1))
+                           (org-agenda-files :maxlevel . 1))
          org-refile-use-outline-path 'file
          org-agenda-block-separator #x2501
          org-habit-show-all-today t
@@ -949,67 +951,69 @@
 
     PRIORITY may be one of the characters ?A, ?B, or ?C."
      (let ((subtree-end (save-excursion (org-end-of-subtree t)))
-    	(pri-value (* 1000 (- org-lowest-priority priority)))
-    	(pri-current (org-get-priority (thing-at-point 'line t))))
+        (pri-value (* 1000 (- org-lowest-priority priority)))
+        (pri-current (org-get-priority (thing-at-point 'line t))))
        (if (= pri-value pri-current)
-    	subtree-end
+        subtree-end
          nil)))
 
    (setq org-agenda-custom-commands
          '(
-    	("d" "Agenda "
-    	 ;; Display items with priority A
-    	 (
-    	  (tags "PRIORITY=\"A\""
-    		((org-agenda-skip-function
-    		  '(org-agenda-skip-entry-if 'todo 'done))
-    		 (org-agenda-overriding-header
-    		  "High-priority unfinished tasks:")))
+        ("d" "Agenda "
+         ;; Display items with priority A
+         (
+          (tags "PRIORITY=\"A\""
+                ((org-agenda-skip-function
+                  '(org-agenda-skip-entry-if 'todo 'done))
+                 (org-agenda-overriding-header
+                  "High-priority unfinished tasks:")))
 
              ;; View curret day in the calendar view
              (agenda "" ((org-agenda-span 'day)
-    		      (org-agenda-overriding-header
-    		       "Today:")))
+                      (org-agenda-overriding-header
+                       "Today:")))
 
-    	  ;; Display items with priority B
-    	  ;; (really it is view all items minus A & C)
+          ;; Display items with priority B
+          ;; (really it is view all items minus A & C)
              (alltodo ""
                       ((org-agenda-skip-function
-    		     '(or (air-org-skip-subtree-if-priority ?A)
+                     '(or (air-org-skip-subtree-if-priority ?A)
                              (air-org-skip-subtree-if-priority ?C)))
                        (org-agenda-overriding-header "Tasks:")))
 
              ;; Display items with pirority C
              (tags "PRIORITY=\"C\""
-    		((org-agenda-skip-function
-    		  '(org-agenda-skip-entry-if 'todo 'done))
-    		 (org-agenda-overriding-header
-    		  "Low-priority Unfinished tasks:")))
+                ((org-agenda-skip-function
+                  '(org-agenda-skip-entry-if 'todo 'done))
+                 (org-agenda-overriding-header
+                  "Low-priority Unfinished tasks:")))
              ))))
 
    (setq org-capture-templates
          `(
-   	("t" "Task"
-   	 entry (file+headline "~/Documentos/Org/Todo.org" "Tasks")
-   	 "* TODO %?\n Captured: %<%Y-%m-%d %I:%M %p>"
-   	 :empty-lines 1 )
-   	("h" "Habit"
-   	 entry (file+headline "~/Documentos/Org/Habits.org" "Tasks")
-   	 "* TODO %?\n Captured: %<%Y-%m-%d %I:%M %p>"
-   	 :empty-lines 1)
-   	("i" "Meeting"
-   	 entry (file "~/Documentos/Org/Agenda.org")
-   	 "* Meeting with %? \n%T" :empty-lines 1)
-   	("n" "Notes"
-   	 entry (file+headline "~/Documentos/Org/Notes.org" "Notes")
-   	 "* %?\n Captured: %<%Y-%m-%d %I:%M %p>"
-   	 :empty-lines 1)
-   	)
+        ("t" "Task"
+         entry (file+headline "~/Documentos/Org/Todo.org" "Tasks")
+         "* TODO %?\n Captured: %<%Y-%m-%d %I:%M %p>"
+         :empty-lines 1 )
+        ("h" "Habit"
+         entry (file+headline "~/Documentos/Org/Habits.org" "Tasks")
+         "* TODO %?\n Captured: %<%Y-%m-%d %I:%M %p>"
+         :empty-lines 1)
+        ("i" "Meeting"
+         entry (file "~/Documentos/Org/Agenda.org")
+         "* Meeting with %? \n%T" :empty-lines 1)
+        ("n" "Notes"
+         entry (file+headline "~/Documentos/Org/Notes.org" "Notes")
+         "* %?\n Captured: %<%Y-%m-%d %I:%M %p>"
+         :empty-lines 1)
+        )
          )
 
    (global-set-key (kbd "C-c c") #'org-capture)
 
   ;(add-hook 'org-agenda-mode-hook 'elegant-agenda-mode)
+  (add-hook 'org-agenda-mode-hook 'my/nil-mode-line)
+  (add-hook 'calendar-mode-hook   'my/nil-mode-line)
 
 #+END_SRC
 * SVG Tags
@@ -1150,12 +1154,13 @@
   (require 'nerd-icons)
   (require 'nerd-icons-dired)
   (add-hook 'dired-mode-hook #'nerd-icons-dired-mode)
+  (add-hook 'dired-mode-hook #'my/nil-mode-line)
 
 #+END_SRC
 * Colors and faces
 #+BEGIN_SRC emacs-lisp
 
   (load-file "~/.emacs.d/elisp/my-theme.el")
-  (my/theme-mode 'moon)
+  (my/theme-mode 'light)
 
 #+END_SRC
