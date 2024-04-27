@@ -1,0 +1,105 @@
+#!/bin/sh
+
+SHADOW=false
+ROUNDED_CORNERS=false
+BACKGROUND_FLAG=false
+BACKGROUND=""
+SCREENSHOTFOLDER=$(pwd)
+MASK=/tmp/mask.png
+DATE=$(date '+%Y-%m-%d_%H%M%S')
+FILE=$SCREENSHOTFOLDER/$DATE'_capture_region'.png
+
+help () {
+    echo "LMAO"
+}
+
+rounded_corners () {
+    echo "Apliying rounded corners"
+    convert $FILE -matte \
+	\( -size $w'x'$h xc:none -draw \
+	"roundrectangle 0,0,$(($w-1)),$(($h-1)),15,15" \) \
+	-compose DstIn -composite $FILE
+}
+
+shadow () {
+    echo "Apliying shadow"
+    convert $FILE\
+	\( +clone -background black -shadow 30x8+0+0 \) +swap \
+	-background transparent \
+	-layers merge +repage $FILE
+
+}
+
+background () {
+    echo "Apliying composition (capture over background)"
+    convert -size $w'x'$h xc:$BACKGROUND -resize 110% \
+	$FILE -gravity center -composite $FILE
+}
+
+for ((i=1; i<=$#; i++));
+do
+    case ${!i} in
+	-h )
+	    help
+	    exit 0
+	    ;;
+	-s )
+	    SHADOW=true
+            ;;
+	-r )
+	    ROUNDED_CORNERS=true
+	    ;;
+	-b )
+	    let i=$((i+1))
+	    BACKGROUND_FLAG=true
+	    BACKGROUND=${!i}
+	    ;;
+	-o )	    
+	    let i=$((i+1))
+	    FILE_FLAG=true
+	    FILE=${!i}
+	    ;;
+	* )	    
+	    echo "ERROR:No existe el parametro: ${!i}"
+	    echo ""
+	    help
+	    exit 1
+	    ;;
+    esac
+done
+
+echo "Selected region."
+read -r x y w h < <(slop -f "%x %y %w %h")
+
+
+if ! [[ $x =~ ^[0-9]+$ ]];
+then exit 0
+else
+    echo "x= $x, y=$y, Width=$w, Height=$h"
+fi
+
+import -window root -crop $w'x'$h+$x+$y $FILE
+
+if [ $BACKGROUND_FLAG = false ]
+then BACKGROUND=$(convert $FILE -format %c \
+			  -colorspace LAB \
+			  -colors 1\
+			  histogram:info:- | grep -Eo '#[0-9A-F]*')
+fi
+
+if $ROUNDED_CORNERS
+then rounded_corners
+fi
+
+if $SHADOW
+then shadow
+fi
+
+if $BACKGROUND_FLAG
+then background
+fi
+
+sxiv -f -z 80 $FILE
+
+rm -f $MASK
+exit 0
