@@ -1,12 +1,12 @@
 local wezterm = require 'wezterm'
 local act = wezterm.action
-local colors = require('lua/rose-pine-moon').colors()
+local colors = require('lua/rose-pine').colors()
 -- local window_frame = require('lua/rose-pine').window_frame()
 
 local config = {}
 
-config.font = wezterm.font "Iosevka SS07"
-config.font_size = 13
+config.font = wezterm.font "JetBrains Mono"
+config.font_size = 12
 -- config.color_scheme = 'Gnometerm (terminal.sexy)'
 -- config.color_scheme = 'OneDark (base16)'
 -- config.color_scheme = 'matrix'

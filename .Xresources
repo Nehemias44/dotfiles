@@ -51,13 +51,13 @@ URxvt.keysym.C-slash:  font-size:show
 URxvt.keysym.Shift-Up: command:\033]720;1\007
 URxvt.keysym.Shift-Down: command:\033]721;1\007
 
-dwm.normbgcolor:       base00
-dwm.normfgcolor:       base07
-dwm.normbordercolor:   base08
+!dwm.normbgcolor:       base00
+!dwm.normfgcolor:       base07
+!dwm.normbordercolor:   base08
 
-dwm.selbgcolor:        base00
-dwm.selfgcolor:	       base0F
-dwm.selbordercolor:    base00	
+!dwm.selbgcolor:        base00
+!dwm.selfgcolor:	       base0F
+!dwm.selbordercolor:    base00	
 
 ! ! special
 ! *.foreground: #93a1a1

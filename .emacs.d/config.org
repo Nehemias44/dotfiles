@@ -1,6 +1,6 @@
 #+TITLE: Emacs Config File
 #+AUTHOR: Leanhdro
-#+STARTUP: overview
+#+STARTUP: overview hidestars 
 * Core
 ** Sever
 #+BEGIN_SRC emacs-lisp
@@ -8,22 +8,22 @@
   (require 'server)
   (unless (server-running-p)
     (server-start))
-  
+
 #+END_SRC
 ** Package management
 #+BEGIN_SRC emacs-lisp
 
   (defvar bootstrap-version)
   (let ((bootstrap-file
-	 (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-	(bootstrap-version 5))
+         (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+        (bootstrap-version 5))
     (unless (file-exists-p bootstrap-file)
       (with-current-buffer
-	  (url-retrieve-synchronously
-	   "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-	   'silent 'inhibit-cookies)
-	(goto-char (point-max))
-	(eval-print-last-sexp)))
+  	(url-retrieve-synchronously
+  	 "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+  	 'silent 'inhibit-cookies)
+        (goto-char (point-max))
+        (eval-print-last-sexp)))
     (load bootstrap-file nil 'nomessage))
 
 #+END_SRC
@@ -31,42 +31,42 @@
 #+BEGIN_SRC emacs-lisp
 
   (setq package-list
-  	'(rainbow-mode
-  	  rainbow-delimiters
-  	  lua-mode
-  	  rust-mode
-  	  yaml-mode
-  	  haskell-mode
-  	  org-bullets
-  	  olivetti
-  	  which-key
-  	  multiple-cursors
-  	  ibuffer
-  	  iedit
-  	  imenu-list
-  	  projectile
-  	  company
-  	  company-box
-  	  yasnippet
-  	  yasnippet-snippets
-  	  lsp-mode
-  	  lsp-java
-  	  lsp-jedi
-  	  lsp-ui
-  	  dap-mode
-  	  vterm
-  	  vterm-toggle
-  	  vertico
-  	  cape
-  	  orderless
-  	  consult
-  	  consult-recoll
-  	  marginalia
-  	  mini-frame
-  	  zencoding-mode
-  	  nerd-icons
-  	  nerd-icons-dired
-  	  elegant-agenda-mode))
+        '(rainbow-mode
+  	rainbow-delimiters
+  	lua-mode
+  	rust-mode
+  	yaml-mode
+  	haskell-mode
+  	org-bullets
+  	olivetti
+  	which-key
+  	multiple-cursors
+  	ibuffer
+  	iedit
+  	imenu-list
+  	projectile
+  	company
+  	company-box
+  	yasnippet
+  	yasnippet-snippets
+  	lsp-mode
+  	lsp-java
+  	lsp-jedi
+  	lsp-ui
+  	dap-mode
+  	vterm
+  	vterm-toggle
+  	vertico
+  	cape
+  	orderless
+  	consult
+  	consult-recoll
+  	marginalia
+  	mini-frame
+  	zencoding-mode
+  	nerd-icons
+  	nerd-icons-dired
+  	elegant-agenda-mode))
 
   (dolist (package package-list)
     (straight-use-package package))
@@ -91,19 +91,19 @@
   (straight-use-package
    '(svg-tag-mode :type git :host github :repo "rougier/svg-tag-mode"))
 
-    (straight-use-package
-     '(sideframe :type git :host github :repo "rougier/sideframe"))
+  (straight-use-package
+   '(sideframe :type git :host github :repo "rougier/sideframe"))
 
 #+END_SRC
 ** Encoding
 #+BEGIN_SRC emacs-lisp
 
   (setenv "LANG" "en_US.UTF-8")
-  (set-default-coding-systems 'utf-8)     ; Default to utf-8 encoding
-  (prefer-coding-system       'utf-8)     ; Add utf-8 at the front for automatic detection.
-  (set-terminal-coding-system 'utf-8)     ; Set coding system of terminal output
-  (set-keyboard-coding-system 'utf-8)     ; Set coding system for keyboard input on TERMINAL
-  (set-language-environment "English")    ; Set up multilingual environment
+  (set-default-coding-systems 'utf-8)    ; Default to utf-8 encoding
+  (prefer-coding-system       'utf-8)    ; Add utf-8 at the front for automatic detection.
+  (set-terminal-coding-system 'utf-8)    ; Set coding system of terminal output
+  (set-keyboard-coding-system 'utf-8)    ; Set coding system for keyboard input on TERMINAL
+  (set-language-environment "English")   ; Set up multilingual environment
 
 #+END_SRC
 * Startup
@@ -122,7 +122,7 @@
   (setq-default c-basic-offset 4)
   (electric-pair-mode t)
   (setq make-backup-files nil) ; stop creating ~ files
-  (add-to-list 'load-path "~/.emacs.d/elisp")
+  (add-to-list 'load-path "~/.emacs.d/elisp/")
 
   (setq scroll-step            1
         scroll-conservatively  10000)
@@ -140,9 +140,16 @@
 
 #+END_SRC
 * Interface
+** Colors and faces
+#+BEGIN_SRC emacs-lisp
+
+  (add-to-list 'custom-theme-load-path "~/.emacs.d/elisp/themes/")
+  (load-theme 'rose-pine t)
+
+#+END_SRC
 ** Delimiters
 #+BEGIN_SRC emacs-lisp
-  
+
   (require 'rainbow-delimiters)
   (add-hook 'org-mode-hook  #'rainbow-delimiters-mode)
   (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
@@ -225,11 +232,11 @@
 #+END_SRC
 ** Dialog
 #+BEGIN_SRC emacs-lisp
-  
+
   (setq-default show-help-function nil    ; No help text
-		use-file-dialog nil       ; No file dialog
-		use-dialog-box nil        ; No dialog box
-		pop-up-windows nil)       ; No popup windows
+  	      use-file-dialog nil       ; No file dialog
+  	      use-dialog-box nil        ; No dialog box
+  	      pop-up-windows nil)       ; No popup windows
 
   (tooltip-mode -1)                       ; No tooltips
   (scroll-bar-mode -1)                    ; No scroll bars
@@ -240,23 +247,23 @@
 #+BEGIN_SRC emacs-lisp
 
   (setq-default use-short-answers t                     ; Replace yes/no prompts with y/n
-		confirm-nonexistent-file-or-buffer nil) ; Ok to visit non existent files
+  	      confirm-nonexistent-file-or-buffer nil) ; Ok to visit non existent files
 
   (delete-selection-mode 1)
 
 #+END_SRC
 ** Scroll
 #+BEGIN_SRC emacs-lisp
-  
-(setq-default scroll-conservatively 101       ; Avoid recentering when scrolling far
-              scroll-margin 2                 ; Add a margin when scrolling vertically
-              recenter-positions '(5 bottom)) ; Set re-centering positions
+
+  (setq-default scroll-conservatively 101       ; Avoid recentering when scrolling far
+                scroll-margin 2                 ; Add a margin when scrolling vertically
+                recenter-positions '(5 bottom)) ; Set re-centering positions
 
 #+END_SRC
 ** Clipboard
 #+BEGIN_SRC emacs-lisp
-  
-(setq-default select-enable-clipboard t) ; Merge system's and Emacs' clipboard
+
+  (setq-default select-enable-clipboard t) ; Merge system's and Emacs' clipboard
 
 #+END_SRC
 ** Fonts
@@ -267,39 +274,40 @@
 #+BEGIN_SRC emacs-lisp
 
   (set-face-attribute 'default nil
-  		      :family "Roboto Mono"
-  		      :weight 'light
-  		      :height 140)
+  		    :family "Iosevka Nerd Font"
+  		    :weight 'light
+  		    :height 130)
 
   (set-face-attribute 'bold nil
-  		      :family "Roboto Mono"
-  		      :weight 'regular)
+  		    :family "Iosevka Nerd Font"
+  		    :weight 'regular)
 
   (set-face-attribute 'italic nil
-  		      :family "Victor Mono"
-  		      :height 140
-  		      :weight 'semilight
-  		      :slant 'italic)
-  
+  		    :family "Iosevka Nerd Font"
+  		    :height 130
+  		    :weight 'semilight
+  		    :slant 'italic)
+
   (set-fontset-font t 'unicode
-  		    (font-spec :name "Inconsolata") nil)
+  		  (font-spec :name "Inconsolata") nil)
 
   (set-fontset-font t '(#xe000 . #xffdd)
-  		    (font-spec :name "RobotoMono Nerd Font"
-  			       :size 16) nil)
+  		  (font-spec :name "Iosevka Nerd Font"
+  			     :size 15) nil)
+
 #+END_SRC
 
 ** Typography
 #+BEGIN_SRC emacs-lisp
 
   (setq-default fill-column 80
-		sentence-end-double-space nil
-		bidi-paragraph-direction 'left-to-right
-		truncate-string-ellipsis "…")
+  	      sentence-end-double-space nil
+  	      bidi-paragraph-direction 'left-to-right
+  	      truncate-string-ellipsis "…")
 
   (setq x-underline-at-descent-line nil
-	x-use-underline-position-properties t
-	underline-minimum-offset 10)
+        x-use-underline-position-properties t
+        underline-minimum-offset 10)
 #+END_SRC
 ** Cursor
 #+BEGIN_SRC emacs-lisp
@@ -327,31 +335,47 @@
 ** Hightlight current line
 #+BEGIN_SRC emacs-lisp
 
-  (global-hl-line-mode 1)
+  ;; let's enable it for all programming major modes
+  (add-hook 'prog-mode-hook #'hl-line-mode)
+  ;; and for all modes derived from text-mode
+  (add-hook 'text-mode-hook #'hl-line-mode)
 
 #+END_SRC
 ** Modeline and headerline
 #+BEGIN_SRC emacs-lisp
 
-  (load-file "~/.emacs.d/elisp/my-header-line.el")
-
-  (add-hook 'prog-mode-hook #'my/header-line-mode)
-  (add-hook 'org-mode-hook #'my/header-line-mode)
-  (add-hook 'conf-mode-hook #'my/header-line-mode)
+  (add-to-list 'load-path "~/.emacs.d/elisp/mono-modeline" )
+  (require 'mono-modeline)
+  (set-face-attribute 'header-line-status-RO nil
+  		    :background "#9ccfd8"
+  		    :foreground (face-background 'default))
+  (set-face-attribute 'header-line-status-RW nil
+  		    :background "#908caa"
+  		    :foreground (face-background 'default))
+  (set-face-attribute 'header-line-status-** nil
+  		    :background "#eb6f92"
+  		    :foreground (face-background 'default))
+  (set-face-attribute 'header-line-default nil
+  		    :background "#26233a"
+  		    :foreground "#908caa")
+  (add-hook 'prog-mode-hook  #'mono-modeline-mode)
+  (add-hook 'org-mode-hook   #'mono-modeline-mode)
+  (add-hook 'conf-mode-hook  #'mono-modeline-mode)
+  (mono-thin-mode-line)
 
 #+END_SRC
 ** Minibuffer
 *** Setup minibuffer
 #+BEGIN_SRC emacs-lisp
-  
-(defun my/minibuffer-setup ()
 
-  (set-window-margins nil 0 0)
-  (set-fringe-style '(0 . 0))
-  (cursor-intangible-mode t)
-  (face-remap-add-relative 'default :inherit 'highlight))
+  (defun my/minibuffer-setup ()
 
-(add-hook 'minibuffer-setup-hook #'my/minibuffer-setup)
+    (set-window-margins nil 0 0)
+    (set-fringe-style '(0 . 0))
+    (cursor-intangible-mode t)
+    (face-remap-add-relative 'default :inherit 'highlight))
+
+  (add-hook 'minibuffer-setup-hook #'my/minibuffer-setup)
 
 #+END_SRC
 *** Resize window (Vertico)
@@ -438,13 +462,13 @@
                        (child-frame-border-width . ,border)
                        (internal-border-width . 0)))))))
 
-  ;(set-face-background 'child-frame-border (face-foreground 'nano-faded))
+  					;(set-face-background 'child-frame-border (face-foreground 'nano-faded))
   (setq mini-frame-default-height 3)
   (setq mini-frame-create-lazy t)
   (setq mini-frame-show-parameters 'my/minibuffer--frame-parameters)
   (setq mini-frame-ignore-commands
         '("edebug-eval-expression" debugger-eval-expression))
-  ;(setq mini-frame-internal-border-color (face-foreground 'nano-faded))
+  					;(setq mini-frame-internal-border-color (face-foreground 'nano-faded))
 
   (setq mini-frame-resize-min-height 3)
   (setq mini-frame-resize t)
@@ -614,7 +638,7 @@
 #+BEGIN_SRC emacs-lisp
 
   (require 'nerd-icons)
-  
+
 #+END_SRC
 ** Which key
 #+BEGIN_SRC emacs-lisp
@@ -644,7 +668,7 @@
 
   (require 'iedit)
   (global-set-key (kbd "C-:") 'iedit-mode)
-  
+
 #+END_SRC
 ** Imenu-list
 #+BEGIN_SRC emacs-lisp
@@ -693,7 +717,7 @@
 
   (global-set-key (kbd "M-<up>") 'move-line-up)
   (global-set-key (kbd "M-<down>") 'move-line-down)
-  
+
 #+END_SRC
 * Programming
 ** Autocomplete
@@ -704,10 +728,10 @@
   (require 'company-box)
 
   (setq-default company-minimum-prefix-length 3
-		  company-idle-delay 0)
+  	      company-idle-delay 0)
   (global-company-mode)
   (add-hook 'company-mode-hook 'company-box-mode)
-  
+
 #+END_SRC
 *** Snippets
 #+BEGIN_SRC emacs-lisp
@@ -715,8 +739,8 @@
   (require 'yasnippet)
   (require 'yasnippet-snippets)
   (setq yas-snippet-dirs
-	'("~/.emacs.d/snippets"
-	  "~/.emacs.d/straight/repos/yasnippet-snippets/snippets"))
+        '("~/.emacs.d/snippets"
+  	"~/.emacs.d/straight/repos/yasnippet-snippets/snippets"))
   (yas-global-mode t)
 
 #+END_SRC
@@ -738,10 +762,10 @@
   (defun my-projectile-run-project (&optional prompt)
     (interactive "P")
     (let ((compilation-read-command
-	   (or (not (projectile-run-command (projectile-compilation-dir)))
-	       prompt)))
+  	 (or (not (projectile-run-command (projectile-compilation-dir)))
+  	     prompt)))
       (projectile-run-project prompt)))
-  
+
 #+END_SRC
 ** Languages
 #+BEGIN_SRC emacs-lisp
@@ -797,8 +821,8 @@
 ** General
 #+BEGIN_SRC emacs-lisp
 
-  (add-hook 'org-mode-hook #'org-indent-mode)
-  (add-hook 'org-mode-hook 'variable-pitch-mode)
+  					;(add-hook 'org-mode-hook #'org-indent-mode)
+  					;(add-hook 'org-mode-hook 'variable-pitch-mode)
 
 
   (with-eval-after-load 'org
@@ -817,14 +841,6 @@
     			     (,electric-pair-inhibit-predicate c))))))
 
 #+END_SRC
-** Bullets
-#+BEGIN_SRC emacs-lisp
-
-  (require 'org-bullets)
-  (setq org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●"))
-  (add-hook 'org-mode-hook 'org-bullets-mode)
-
-#+END_SRC
 ** Olivetti
 #+BEGIN_SRC emacs-lisp
 
@@ -840,8 +856,15 @@
     (interactive)                                                                    
     (let ((org-link-frame-setup (cons (cons 'file 'find-file) org-link-frame-setup)))
       (org-open-at-point)))
-  
+
   (define-key global-map (kbd "C-o") #'mda/org-open-current-window)
+
+#+END_SRC
+
+** Writer modes
+#+BEGIN_SRC emacs-lisp
+
+  (require 'nano-writer)
 
 #+END_SRC
 * Calendar
@@ -850,170 +873,135 @@
   (setq calendar-date-style 'iso)
   (setq calendar-week-start-day 1)
 
-  ;; (setq calendar-day-header-array
-  ;; 	["Do" "Lu" "Ma" "Mi" "Ju" "Vi" "Sá"])
-  ;; (setq calendar-day-name-array
-  ;; 	["domingo" "lunes" "martes" "miércoles"
-  ;; 	 "jueves" "viernes" "sábado"])
-  ;; (setq calendar-month-abbrev-array
-  ;; 	["Ene" "Feb" "Mar" "Abr" "May" "Jun"
-  ;; 	 "Jul" "Ago" "Sep" "Oct" "Nov" "Dic"])
-  ;; (setq calendar-month-name-array
-  ;; 	["enero"
-  ;; 	 "febrero"
-  ;; 	 "marzo"
-  ;; 	 "abril"
-  ;; 	 "mayo"
-  ;; 	 "junio"
-  ;; 	 "julio"
-  ;; 	 "agosto"
-  ;; 	 "septiembre"
-  ;; 	 "octubre"
-  ;; 	 "noviembre"
-  ;; 	 "diciembre"])
-
-  ;; (setq calendar-holidays
-  ;; 	'((holiday-fixed 1 1   "Año Nuevo")
-  ;; 	  (holiday-fixed 1 6   "Reyes Magos")
-  ;; 	  (holiday-fixed 2 4   "Dia del Veterano")
-  ;; 	  (holiday-fixed 4 18  "Jueves Santo")
-  ;; 	  (holiday-fixed 4 19  "Viernes Santo")
-  ;; 	  (holiday-fixed 5 1   "Dia del Trabajador")
-  ;; 	  (holiday-fixed 5 25  "Revolucíon de Mayo")
-  ;; 	  (holiday-fixed 6 20  "Dia de la Bandera")
-  ;; 	  (holiday-fixed 12 08 "Inmaculada Concepcion")
-  ;; 	  (holiday-fixed 12 25 "Navidad")
-  ;; 	  ))
-
 #+end_src
 * Agenda
 #+BEGIN_SRC emacs-lisp
 
-   (add-to-list 'org-modules 'org-habit)
-   (require 'org-habit)
-   (require 'org-agenda)
-                                        ;(require 'elegant-agenda-mode)
+  (add-to-list 'org-modules 'org-habit)
+  (require 'org-habit)
+  (require 'org-agenda)
+  					;(require 'elegant-agenda-mode)
 
-   (global-set-key (kbd "C-c a") 'org-agenda)
+  (global-set-key (kbd "C-c a") 'org-agenda)
 
-   ;; Files
-   (setq org-agenda-files '("~/Documentos/Repos/agenda/Inbox.org"
-                         "~/Documentos/Repos/agenda/Tasks.org"
-                         "~/Documentos/Repos/agenda/Work.org"
-                         "~/Documentos/Repos/agenda/Habits.org"
-                         "~/Documentos/Repos/agenda/Notes.org"
-                         "~/Documentos/Repos/agenda/Projects.org"))
+  ;; Files
+  (setq org-agenda-files '("~/Documents/Repos/agenda/Inbox.org"
+                           "~/Documents/Repos/agenda/Tasks.org"
+                           "~/Documents/Repos/agenda/Work.org"
+                           "~/Documents/Repos/agenda/Habits.org"
+                           "~/Documents/Repos/agenda/Notes.org"
+                           "~/Documents/Repos/agenda/Projects.org"))
 
-   (setq org-archive-location
-         "~/Documentos/Repos/agenda/Archivo/%s_store.org::datetree/")
+  (setq org-archive-location
+        "~/Documentos/Repos/agenda/Archivo/%s_store.org::datetree/")
 
-   ;; Keywords
-   (setq org-todo-keywords
-         '((sequence "TODO(t!)"
-                  "PROCESSING(p!)"	  
-                  "LOCKED(l!)"   		  
-                  "|" "CANCELLED(c!)" "DONE(d!)" "STORE(s!)")))
-   ;; Faces
-   (setq org-todo-keyword-faces
-         (quote (("TODO"       :inherit org-todo)
-                 ("DONE"       :inherit org-done)
-                 ("PROCESSING" :inherit font-lock-keyword-face)
-                 ("LOCKED"     :inherit font-lock-warning)
-                 ("CANCELED"   :inherit font-lock-comment-face)
-                 ("STORE"      :inherit font-lock-doc-face))))
+  ;; Keywords
+  (setq org-todo-keywords
+        '((sequence "TODO(t!)"
+                    "PROCESSING(p!)"	  
+                    "LOCKED(l!)"   		  
+                    "|" "CANCELLED(c!)" "DONE(d!)" "STORE(s!)")))
+  ;; Faces
+  (setq org-todo-keyword-faces
+        (quote (("TODO"       :inherit org-todo)
+                ("DONE"       :inherit org-done)
+                ("PROCESSING" :inherit font-lock-keyword-face)
+                ("LOCKED"     :inherit font-lock-warning)
+                ("CANCELED"   :inherit font-lock-comment-face)
+                ("STORE"      :inherit font-lock-doc-face))))
 
-   (setq org-agenda-inhibit-startup t
-         org-agenda-include-diary nil
-         org-agenda-show-log t
-         org-agenda-show-all-dates t
-         org-agenda-time-in-grid t
-         org-agenda-show-current-time-in-grid t
-         org-agenda-span 7
-         org-agenda-start-on-weekday 1
-         org-agenda-sticky nil
-         org-agenda-window-setup 'current-window
-         org-agenda-use-tag-inheritance t
-         org-show-habits-only-for-today t
-         org-deadline-warning-days 7
-         org-log-done 'time
-         org-log-into-drawer "LOGBOOK"
-         org-tags-column 70
-         org-refile-targets '((nil :maxlevel . 1)
-                           (org-agenda-files :maxlevel . 1))
-         org-refile-use-outline-path 'file
-         org-agenda-block-separator #x2501
-         org-habit-show-all-today t
-         org-habit-show-habits nil
-         org-extend-today-unitl 3)
+  (setq org-agenda-inhibit-startup t
+        org-agenda-include-diary nil
+        org-agenda-show-log t
+        org-agenda-show-all-dates t
+        org-agenda-time-in-grid t
+        org-agenda-show-current-time-in-grid t
+        org-agenda-span 7
+        org-agenda-start-on-weekday 1
+        org-agenda-sticky nil
+        org-agenda-window-setup 'current-window
+        org-agenda-use-tag-inheritance t
+        org-show-habits-only-for-today t
+        org-deadline-warning-days 7
+        org-log-done 'time
+        org-log-into-drawer "LOGBOOK"
+        org-tags-column 0
+        org-refile-targets '((nil :maxlevel . 1)
+                             (org-agenda-files :maxlevel . 1))
+        org-refile-use-outline-path 'file
+        org-agenda-block-separator #x2501
+        org-habit-show-all-today t
+        org-habit-show-habits nil
+        org-extend-today-unitl 3)
 
-   (defun air-org-skip-subtree-if-priority (priority)
-     "Skip an agenda subtree if it has a priority of PRIORITY.
+  (defun air-org-skip-subtree-if-priority (priority)
+    "Skip an agenda subtree if it has a priority of PRIORITY.
 
     PRIORITY may be one of the characters ?A, ?B, or ?C."
-     (let ((subtree-end (save-excursion (org-end-of-subtree t)))
-        (pri-value (* 1000 (- org-lowest-priority priority)))
-        (pri-current (org-get-priority (thing-at-point 'line t))))
-       (if (= pri-value pri-current)
-        subtree-end
-         nil)))
+    (let ((subtree-end (save-excursion (org-end-of-subtree t)))
+  	(pri-value (* 1000 (- org-lowest-priority priority)))
+  	(pri-current (org-get-priority (thing-at-point 'line t))))
+      (if (= pri-value pri-current)
+  	subtree-end
+        nil)))
 
-   (setq org-agenda-custom-commands
-         '(
-        ("d" "Agenda "
-         ;; Display items with priority A
-         (
-          (tags "PRIORITY=\"A\""
-                ((org-agenda-skip-function
-                  '(org-agenda-skip-entry-if 'todo 'done))
-                 (org-agenda-overriding-header
-                  "High-priority unfinished tasks:")))
+  (setq org-agenda-custom-commands
+        '(
+  	("d" "Agenda "
+  	 ;; Display items with priority A
+  	 (
+            (tags "PRIORITY=\"A\""
+  		((org-agenda-skip-function
+                    '(org-agenda-skip-entry-if 'todo 'done))
+  		 (org-agenda-overriding-header
+                    "High-priority unfinished tasks:")))
 
-             ;; View curret day in the calendar view
-             (agenda "" ((org-agenda-span 'day)
-                      (org-agenda-overriding-header
-                       "Today:")))
+            ;; View curret day in the calendar view
+            (agenda "" ((org-agenda-span 'day)
+                        (org-agenda-overriding-header
+                         "Today:")))
 
-          ;; Display items with priority B
-          ;; (really it is view all items minus A & C)
-             (alltodo ""
-                      ((org-agenda-skip-function
-                     '(or (air-org-skip-subtree-if-priority ?A)
-                             (air-org-skip-subtree-if-priority ?C)))
-                       (org-agenda-overriding-header "Tasks:")))
+            ;; Display items with priority B
+            ;; (really it is view all items minus A & C)
+            (alltodo ""
+                     ((org-agenda-skip-function
+                       '(or (air-org-skip-subtree-if-priority ?A)
+                            (air-org-skip-subtree-if-priority ?C)))
+                      (org-agenda-overriding-header "Tasks:")))
 
-             ;; Display items with pirority C
-             (tags "PRIORITY=\"C\""
-                ((org-agenda-skip-function
-                  '(org-agenda-skip-entry-if 'todo 'done))
-                 (org-agenda-overriding-header
-                  "Low-priority Unfinished tasks:")))
-             ))))
+            ;; Display items with pirority C
+            (tags "PRIORITY=\"C\""
+  		((org-agenda-skip-function
+                    '(org-agenda-skip-entry-if 'todo 'done))
+  		 (org-agenda-overriding-header
+                    "Low-priority Unfinished tasks:")))
+            ))))
 
-   (setq org-capture-templates
-         `(
-        ("t" "Task"
-         entry (file+headline "~/Documentos/Org/Todo.org" "Tasks")
-         "* TODO %?\n Captured: %<%Y-%m-%d %I:%M %p>"
-         :empty-lines 1 )
-        ("h" "Habit"
-         entry (file+headline "~/Documentos/Org/Habits.org" "Tasks")
-         "* TODO %?\n Captured: %<%Y-%m-%d %I:%M %p>"
-         :empty-lines 1)
-        ("i" "Meeting"
-         entry (file "~/Documentos/Org/Agenda.org")
-         "* Meeting with %? \n%T" :empty-lines 1)
-        ("n" "Notes"
-         entry (file+headline "~/Documentos/Org/Notes.org" "Notes")
-         "* %?\n Captured: %<%Y-%m-%d %I:%M %p>"
-         :empty-lines 1)
+  (setq org-capture-templates
+        `(
+  	("t" "Task"
+  	 entry (file+headline "~/Documentos/Org/Todo.org" "Tasks")
+  	 "* TODO %?\n Captured: %<%Y-%m-%d %I:%M %p>"
+  	 :empty-lines 1 )
+  	("h" "Habit"
+  	 entry (file+headline "~/Documentos/Org/Habits.org" "Tasks")
+  	 "* TODO %?\n Captured: %<%Y-%m-%d %I:%M %p>"
+  	 :empty-lines 1)
+  	("i" "Meeting"
+  	 entry (file "~/Documentos/Org/Agenda.org")
+  	 "* Meeting with %? \n%T" :empty-lines 1)
+  	("n" "Notes"
+  	 entry (file+headline "~/Documentos/Org/Notes.org" "Notes")
+  	 "* %?\n Captured: %<%Y-%m-%d %I:%M %p>"
+  	 :empty-lines 1)
+  	)
         )
-         )
 
-   (global-set-key (kbd "C-c c") #'org-capture)
+  (global-set-key (kbd "C-c c") #'org-capture)
 
-  ;(add-hook 'org-agenda-mode-hook 'elegant-agenda-mode)
-  (add-hook 'org-agenda-mode-hook 'my/nil-mode-line)
-  (add-hook 'calendar-mode-hook   'my/nil-mode-line)
+  					;(add-hook 'org-agenda-mode-hook 'elegant-agenda-mode)
+  (add-hook 'org-agenda-mode-hook 'mono-nil-mode-line)
+  (add-hook 'calendar-mode-hook   'mono-nil-mode-line)
 
 #+END_SRC
 * SVG Tags
@@ -1058,58 +1046,58 @@
         `(
           ;; Org tags :EMACS:
   	("\\(:[A-Z]+:\\)" . ((lambda (tag)
-                               (svg-tag-make tag :beg 1 :end -1))))
+                                 (svg-tag-make tag :beg 1 :end -1))))
   	
-        ;; Task priority [#A] [#B] [#C]
-        ("\\[#[A-Z]\\]" . ( (lambda (tag)
-                              (svg-tag-make tag :face 'org-priority 
-                                            :beg 2 :end -1 :margin 0))))
+  	;; Task priority [#A] [#B] [#C]
+  	("\\[#[A-Z]\\]" . ( (lambda (tag)
+                                (svg-tag-make tag :face 'org-priority 
+                                              :beg 2 :end -1 :margin 0))))
 
-        ;; TODO / DONE
-        ("TODO" . ((lambda (tag) (svg-tag-make "TODO" :face 'org-todo :inverse t :margin 0 :width 6))))
-        ("DONE" . ((lambda (tag) (svg-tag-make "DONE" :face 'org-done :margin 0 :width 6))))
+  	;; TODO / DONE
+  	("TODO" . ((lambda (tag) (svg-tag-make "TODO" :face 'org-todo :inverse t :margin 0 :width 6))))
+  	("DONE" . ((lambda (tag) (svg-tag-make "DONE" :face 'org-done :margin 0 :width 6))))
 
 
-        ;; Citation of the form [cite:@Knuth:1984]
-        ("\\(\\[cite:@[A-Za-z]+:\\)" . ((lambda (tag)
-                                          (svg-tag-make tag
-                                                        :inverse t
-                                                        :beg 7 :end -1
-                                                        :crop-right t))))
-        ("\\[cite:@[A-Za-z]+:\\([0-9]+\\]\\)" . ((lambda (tag)
-                                                   (svg-tag-make tag
-  							       :end -1
-  							       :crop-left t))))
+  	;; Citation of the form [cite:@Knuth:1984]
+  	("\\(\\[cite:@[A-Za-z]+:\\)" . ((lambda (tag)
+                                            (svg-tag-make tag
+  							:inverse t
+  							:beg 7 :end -1
+  							:crop-right t))))
+  	("\\[cite:@[A-Za-z]+:\\([0-9]+\\]\\)" . ((lambda (tag)
+                                                     (svg-tag-make tag
+  								 :end -1
+  								 :crop-left t))))
 
-        
-        ;; Active date (with or without day name, with or without time)
-        (,(format "\\(<%s>\\)" date-re) .
-         ((lambda (tag)
-            (svg-tag-make tag :beg 1 :end -1 :margin 0))))
-        (,(format "\\(<%s \\)%s>" date-re day-time-re) .
-         ((lambda (tag)
-            (svg-tag-make tag :beg 1 :inverse nil :crop-right t :margin 0))))
-        (,(format "<%s \\(%s>\\)" date-re day-time-re) .
-         ((lambda (tag)
-            (svg-tag-make tag :end -1 :inverse t :crop-left t :margin 0))))
+  	
+  	;; Active date (with or without day name, with or without time)
+  	(,(format "\\(<%s>\\)" date-re) .
+  	 ((lambda (tag)
+              (svg-tag-make tag :beg 1 :end -1 :margin 0))))
+  	(,(format "\\(<%s \\)%s>" date-re day-time-re) .
+  	 ((lambda (tag)
+              (svg-tag-make tag :beg 1 :inverse nil :crop-right t :margin 0))))
+  	(,(format "<%s \\(%s>\\)" date-re day-time-re) .
+  	 ((lambda (tag)
+              (svg-tag-make tag :end -1 :inverse t :crop-left t :margin 0))))
 
-        ;; Inactive date  (with or without day name, with or without time)
-        (,(format "\\(\\[%s\\]\\)" date-re) .
-         ((lambda (tag)
-            (svg-tag-make tag :beg 1 :end -1 :margin 1 :face 'org-date))))
-        (,(format "\\(\\[%s \\)%s\\]" date-re day-time-re) .
-         ((lambda (tag)
-            (svg-tag-make tag :beg 1 :inverse nil :crop-right t :margin 0 :face 'org-date))))
-        (,(format "\\[%s \\(%s\\]\\)" date-re day-time-re) .
-         ((lambda (tag)
-            (svg-tag-make tag :end -1 :inverse t :crop-left t :margin 0 :face 'org-date))))
+  	;; Inactive date  (with or without day name, with or without time)
+  	(,(format "\\(\\[%s\\]\\)" date-re) .
+  	 ((lambda (tag)
+              (svg-tag-make tag :beg 1 :end -1 :margin 1 :face 'org-date))))
+  	(,(format "\\(\\[%s \\)%s\\]" date-re day-time-re) .
+  	 ((lambda (tag)
+              (svg-tag-make tag :beg 1 :inverse nil :crop-right t :margin 0 :face 'org-date))))
+  	(,(format "\\[%s \\(%s\\]\\)" date-re day-time-re) .
+  	 ((lambda (tag)
+              (svg-tag-make tag :end -1 :inverse t :crop-left t :margin 0 :face 'org-date))))
 
-        ;; ;; Progress
-        ("\\(\\[[0-9]\\{1,3\\}%\\]\\)" . ((lambda (tag)
-                                            (svg-progress-percent (substring tag 1 -2)))))
-        ("\\(\\[[0-9]+/[0-9]+\\]\\)" . ((lambda (tag)
-                                          (svg-progress-count (substring tag 1 -1)))))
-        ))
+  	;; ;; Progress
+  	("\\(\\[[0-9]\\{1,3\\}%\\]\\)" . ((lambda (tag)
+                                              (svg-progress-percent (substring tag 1 -2)))))
+  	("\\(\\[[0-9]+/[0-9]+\\]\\)" . ((lambda (tag)
+                                            (svg-progress-count (substring tag 1 -1)))))
+  	))
 
   ;;(add-hook 'org-mode-hook #'svg-tag-mode)
   ;;(add-hook 'org-agenda-hook #'svg-tag-mode)
@@ -1137,12 +1125,12 @@
 
   (setq vterm-toggle-fullscreen-p nil)
   (add-to-list 'display-buffer-alist
-  	       '((lambda (bufname _) (equal bufname vterm-buffer-name))
-  		 (display-buffer-reuse-window display-buffer-in-direction)
-  		 (direction . bottom)
-  		 (dedicated . t)
-  		 (reusable-frames . visible)
-  		 (window-height . 0.3)))
+  	     '((lambda (bufname _) (equal bufname vterm-buffer-name))
+  	       (display-buffer-reuse-window display-buffer-in-direction)
+  	       (direction . bottom)
+  	       (dedicated . t)
+  	       (reusable-frames . visible)
+  	       (window-height . 0.3)))
 
   (global-set-key (kbd "C-x C-t") 'vterm-toggle)
 
@@ -1154,13 +1142,6 @@
   (require 'nerd-icons)
   (require 'nerd-icons-dired)
   (add-hook 'dired-mode-hook #'nerd-icons-dired-mode)
-  (add-hook 'dired-mode-hook #'my/nil-mode-line)
-
-#+END_SRC
-* Colors and faces
-#+BEGIN_SRC emacs-lisp
-
-  (load-file "~/.emacs.d/elisp/my-theme.el")
-  (my/theme-mode 'light)
+  					;(add-hook 'dired-mode-hook #'my/nil-mode-line)
 
 #+END_SRC

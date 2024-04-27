@@ -3,7 +3,7 @@
 INTERFACE=$(ls /sys/class/net | grep -o 'wl[a-z0-9]*')
 STATE=$(iw $INTERFACE link)
 
-COLOR=$(xrdb -get color13)
+COLOR=$(xrdb -get color5)
 COLOR="^c$COLOR^"
 RESET="^d^"
 ICON="  "
